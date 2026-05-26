@@ -24,5 +24,4 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           name: 'octave_boost_1.0.0.tar.gz'
-          path: 'octave_boost'
           archive: false
