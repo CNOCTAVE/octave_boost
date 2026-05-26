@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+Copyright 2024-2026 Yu Hongbo <yuhongbo@member.fsf.org>, 
+  CNOCTAVE <cnoctave@qq.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+    <meta name="theme-color" content="#00B4FF">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="msapplication-TileImage" content="favicon.ico">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="octave_boost文档">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.17.0/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <title>octave_boost文档</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta name="title" content="octave_boost文档" data-qmeta="title">
+    <meta property="og:title" content="octave_boost文档" data-qmeta="ogTitle">
+    <meta name="twitter:title" content="octave_boost文档" data-qmeta="twitterTitle">
+    <meta name="description" content="Octave中文网是一个面向中文Octave开发者的交流平台，拥有中文Octave文档、中文Octave论坛和中文Octave新闻等特色。"
+        data-qmeta="description">
+    <meta property="og:description" content="Octave中文网是一个面向中文Octave开发者的交流平台，拥有中文Octave文档、中文Octave论坛和中文Octave新闻等特色。"
+        data-qmeta="ogDesc">
+    <meta name="twitter:description" content="Octave中文网是一个面向中文Octave开发者的交流平台，拥有中文Octave文档、中文Octave论坛和中文Octave新闻等特色。"
+        data-qmeta="twitterDesc">
+</head>
+
+<body>
+    <div id="q-app">
+        <q-layout view="hHh LpR fFf">
+            <q-header elevated class="bg-primary text-white">
+                <q-toolbar class="bg-primary text-white q-ny-md shadow-2">
+                    <q-btn stretch flat label="Octave中文网" @click="goTo('https://cnoctave.top')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="octave_boost文档" @click="scrollToTop()"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-space></q-space>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn-dropdown stretch flat icon="translate" label="切换文档语言">
+                      <q-list>
+                        <q-item clickable v-close-popup @click="goTo('index.html')">
+                          <q-item-section>
+                            <q-item-label>zh-CN 简体中文</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-btn-dropdown>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="中文版Octave文档" @click="goTo('https://docs.cnoctave.top')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="学术交流论坛" @click="goTo('https://forum.cnoctave.top')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="新闻" @click="goTo('https://octave.org/news.html')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="使用方法" @click="goTo('https://wiki.octave.org/Using_Octave')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="免费下载" @click="goTo('https://octave.org/download')"></q-btn>
+                </q-toolbar>
+            </q-header>
+            <q-drawer class="bg-primary" show-if-above v-model="leftDrawerOpen" side="left" bordered elevated>
+                <q-list class="title1 text-white bg-primary">
+                    <q-item clickable v-ripple @click="goToID('#homepage')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            项目首页
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#repo_install')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            软件源安装
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#online_install')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            在线安装
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#source_code_install')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            源码安装
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#how_to_use')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            如何使用
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#dependencies')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            依赖库
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#function_usage')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            函数用法
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#boost_accumulators')">
+                        <q-item-section avatar>
+                            <q-icon name="functions" />
+                        </q-item-section>
+                        <q-item-section>
+                            Boost Accumulators
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#boost_chrono')">
+                        <q-item-section avatar>
+                            <q-icon name="schedule" />
+                        </q-item-section>
+                        <q-item-section>
+                            Boost Chrono
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#boost_property_tree')">
+                        <q-item-section avatar>
+                            <q-icon name="account_tree" />
+                        </q-item-section>
+                        <q-item-section>
+                            Boost PropertyTree
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#boost_thread')">
+                        <q-item-section avatar>
+                            <q-icon name="lan" />
+                        </q-item-section>
+                        <q-item-section>
+                            Boost Thread
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#boost_date_time')">
+                        <q-item-section avatar>
+                            <q-icon name="calendar_month" />
+                        </q-item-section>
+                        <q-item-section>
+                            Boost Date_Time
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#common_examples')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            常见用例
+                        </q-item-section>
+                    </q-item>
+                    <q-item clickable v-ripple @click="goToID('#references')">
+                        <q-item-section avatar>
+                            <q-icon name="help" />
+                        </q-item-section>
+                        <q-item-section>
+                            引用octave_boost
+                        </q-item-section>
+                    </q-item>
+                </q-list>
+            </q-drawer>
+
+            <q-page-container>
+                <div style="position: relative;">
+                    <q-img src="banner0.png" spinner-color="white" style="width: 100%; height: 300px;"></q-img>
+                    <div class="q-mx-md rainbow-text"
+                        style="line-height: 300px; font-size: 100px; position: absolute; left: 0%; top: 0%;">octave_boost文档
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="main">
+                        <div class="text-h5 q-ma-md text-red-10">欢迎广大开发者将此文档翻译为其他语言。</div>
+                        <q-btn id="homepage" class="title1 text-white bg-primary" stretch flat
+                            label="项目首页：https://github.com/CNOCTAVE/octave_boost" @click="goTo('https://github.com/CNOCTAVE/octave_boost')"></q-btn>
+                        <q-separator></q-separator>
+                        <div id="repo_install" class="title1 q-ma-md text-primary">软件源安装</div>
+                        <p class="q-ma-md">octave_boost可以通过Octave软件源安装。</p>
+                        <div class="text-h5 q-ma-md text-red-10">通过Octave软件源安装octave_boost，代码如下：</div>
+                        <p class="q-ma-md">>> pkg install -forge octave_boost</p>
+                        <q-separator></q-separator>
+                        <div id="online_install" class="title1 q-ma-md text-primary">在线安装</div>
+                        <p class="q-ma-md">octave_boost可以在线安装。</p>
+                        <div class="text-h5 q-ma-md text-red-10">在线安装octave_boost，代码如下：</div>
+                        <p class="q-ma-md">>> pkg install 'https://github.com/CNOCTAVE/octave_boost/releases/download/1.0.0/octave_boost.tar.gz'</p>
+                        <q-separator></q-separator>
+                        <div id="source_code_install" class="title1 q-ma-md text-primary">源码安装</div>
+                        <p class="q-ma-md">octave_boost可以直接使用tar包安装。</p>
+                        <div class="text-h5 q-ma-md text-red-10">
+                            假设你下载的源码包名为octave_boost.tar.gz，源码安装的代码如下：</div>
+                        <p class="q-ma-md">>> pkg install octave_boost.tar.gz -local</p>
+                        <div class="text-h5 q-ma-md text-red-10">手动编译安装：</div>
+                        <p class="q-ma-md">cd octave_boost/src</p>
+                        <p class="q-ma-md">make</p>
+                        <p class="q-ma-md">make 会自动检测 mkoctfile 和 ../boost/ 目录中的 Boost 头文件。</p>
+                        <p class="q-ma-md">如果需要指定 Boost 路径，请使用：</p>
+                        <p class="q-ma-md">make BOOST_CPPFLAGS="-I/path/to/boost"</p>
+                        <p class="q-ma-md">对于旧版系统，也可以使用 configure 脚本：</p>
+                        <p class="q-ma-md">./configure [BOOST_CPPFLAGS="-I/path/to/boost"]</p>
+                        <p class="q-ma-md">make</p>
+                        <q-separator></q-separator>
+                        <div id="how_to_use" class="title1 q-ma-md text-primary">如何使用</div>
+                        <div class="text-h5 q-ma-md text-red-10">在安装后，加载octave_boost即可使用，代码如下：</div>
+                        <p class="q-ma-md">>> pkg load octave_boost</p>
+                        <q-separator></q-separator>
+                        <div id="dependencies" class="title1 q-ma-md text-primary">依赖库</div>
+                        <div class="text-h5 q-ma-md text-red-10">不同操作系统需要安装 Boost 开发包。</div>
+                        <div class="text-h5 q-ma-md text-red-10">Fedora：</div>
+                        <p class="q-ma-md">$ sudo dnf install boost-devel</p>
+                        <div class="text-h5 q-ma-md text-red-10">Debian/Ubuntu：</div>
+                        <p class="q-ma-md">$ sudo apt install libboost-dev</p>
+                        <div class="text-h5 q-ma-md text-red-10">Arch Linux：</div>
+                        <p class="q-ma-md">$ sudo pacman -S boost</p>
+                        <div class="text-h5 q-ma-md text-red-10">macOS (Homebrew)：</div>
+                        <p class="q-ma-md">$ brew install boost</p>
+                        <div class="text-h5 q-ma-md text-red-10">Windows：</div>
+                        <p class="q-ma-md">请参考 https://www.boost.org/doc/libs/release/more/getting_started/windows.html</p>
+                        <div class="text-h5 q-ma-md text-red-10">C++ 标准要求：</div>
+                        <p class="q-ma-md">考虑到使用boost的C++17库文件和Octave自身依赖的boost版本，octave_boost要求Octave版本大于等于10.1.0。</p>
+                        <p class="q-ma-md">编译器需支持 -std=c++17 标志（GCC 7+、Clang 5+、MSVC 2017+ 或 Apple Clang 14+）。</p>
+                        <q-separator></q-separator>
+                        <div id="function_usage" class="title1 q-ma-md text-primary">函数用法</div>
+                        <p class="q-ma-md">octave_boost 提供以下基于 Boost C++ Libraries 的底层可加载函数，涵盖 Boost.Accumulators 统计累积器的全部能力。</p>
+
+                        <div id="boost_accumulators" class="text-h5 q-ma-md text-red-10">Boost.Accumulators 统计累积器</div>
+                        <p class="q-ma-md">以下函数基于 Boost C++ Libraries 的 Accumulators 框架，提供高性能的在线统计计算能力。所有函数均接受数值矩阵作为输入，自动跳过 NaN 值。</p>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_count</div>
+                        <p class="q-ma-md">Loadable Function: cnt = boost_accumulators_count(data)</p>
+                        <p class="q-ma-md">计算矩阵中非 NaN 元素的数量。基于 boost::accumulators::tag::count。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_count([1, 2, 3, 4, 5]) 返回 5</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_covariance</div>
+                        <p class="q-ma-md">Loadable Function: c = boost_accumulators_covariance(data)</p>
+                        <p class="q-ma-md">计算两个变量之间的协方差。data 必须是 Nx2 矩阵，第一列为变量 X，第二列为变量 Y。基于 boost::accumulators::tag::covariance。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_covariance([1,2; 1,4; 2,3; 6,1]) 返回 -1.75</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_density</div>
+                        <p class="q-ma-md">Loadable Function: density = boost_accumulators_density(data)</p>
+                        <p class="q-ma-md">Loadable Function: density = boost_accumulators_density(data, cache_size, num_bins)</p>
+                        <p class="q-ma-md">估计数据的概率密度函数。返回 Nx2 矩阵，每行为 [value, density]。可选的 cache_size（默认 10000）和 num_bins（默认 100）控制密度估计的精度。基于 boost::accumulators::tag::density。</p>
+                        <p class="q-ma-md">示例：>> d = boost_accumulators_density(randn(1000, 1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_error_of_mean</div>
+                        <p class="q-ma-md">Loadable Function: e = boost_accumulators_error_of_mean(data)</p>
+                        <p class="q-ma-md">计算均值的标准误差（standard error of the mean）。基于 boost::accumulators::tag::error_of<tag::mean>。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_error_of_mean([1.1, 1.2, 1.3]) 返回 0.057735</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_extended_p_square</div>
+                        <p class="q-ma-md">Loadable Function: quantiles = boost_accumulators_extended_p_square(data, probabilities)</p>
+                        <p class="q-ma-md">使用扩展 P^2 算法计算多个分位数估计。data 为数值矩阵，probabilities 为 (0,1) 内的概率值向量。最多支持 20 个概率值。基于 boost::accumulators::tag::extended_p_square。</p>
+                        <p class="q-ma-md">示例：>> q = boost_accumulators_extended_p_square(randn(1000,1), [0.25, 0.5, 0.75])</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_extended_p_square_quantile_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_extended_p_square_quantile_and_variants(data, probabilities)</p>
+                        <p class="q-ma-md">使用扩展 P^2 算法的四种变体（unweighted、weighted、quadratic、weighted quadratic）计算分位数估计。返回结构体，包含 .quantile、.quantile_quadratic、.weighted_quantile、.weighted_quantile_quadratic 字段。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_extended_p_square_quantile_and_variants(randn(1000,1), [0.25, 0.5, 0.75])</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_kurtosis</div>
+                        <p class="q-ma-md">Loadable Function: k = boost_accumulators_kurtosis(data)</p>
+                        <p class="q-ma-md">计算数据的峰度（kurtosis），衡量概率分布的尾重程度。基于 boost::accumulators::tag::kurtosis。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_kurtosis([2, 7, 4, 9, 3]) 返回 -1.39965</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_max</div>
+                        <p class="q-ma-md">Loadable Function: m = boost_accumulators_max(data)</p>
+                        <p class="q-ma-md">计算矩阵中的最大值。基于 boost::accumulators::tag::max。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_max([1, 0, 2, 5, 3]) 返回 5</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_mean_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_mean_and_variants(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_mean_and_variants(data, weights)</p>
+                        <p class="q-ma-md">计算均值及其变体。返回结构体，包含 .mean（算术均值）、.count（元素个数）、.sum（元素和）。如果提供 weights 参数，还包含 .mean_of_weights（权重均值）。基于 boost::accumulators::tag::mean。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_mean_and_variants([1, 0, 2]) 返回 r.mean=1, r.count=3, r.sum=3</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_median_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_median_and_variants(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_median_and_variants(data, cache_size, num_bins)</p>
+                        <p class="q-ma-md">使用三种不同算法计算中位数。返回结构体，包含 .median_p_square（P^2 分位数算法）、.median_density（密度估计算法）、.median_cdist（P^2 累积分布算法）。可选的 cache_size 和 num_bins 控制密度方法精度。基于 boost::accumulators::tag::median。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_median_and_variants(randn(1000, 1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_min</div>
+                        <p class="q-ma-md">Loadable Function: m = boost_accumulators_min(data)</p>
+                        <p class="q-ma-md">计算矩阵中的最小值。基于 boost::accumulators::tag::min。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_min([1, 0, 2, 5, 3]) 返回 0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_moment</div>
+                        <p class="q-ma-md">Loadable Function: m = boost_accumulators_moment(data, k)</p>
+                        <p class="q-ma-md">计算数据的第 k 阶矩（moment）。k 为 1-5 的正整数。第 k 阶矩定义为 sum(x_i^k) / N。基于 boost::accumulators::tag::moment。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_moment([2, 4, 5], 2) 返回 15</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_p_square_cumulative_distribution</div>
+                        <p class="q-ma-md">Loadable Function: hist = boost_accumulators_p_square_cumulative_distribution(data)</p>
+                        <p class="q-ma-md">Loadable Function: hist = boost_accumulators_p_square_cumulative_distribution(data, num_cells)</p>
+                        <p class="q-ma-md">使用 P^2 算法估计累积分布函数。返回 Nx2 矩阵，每行为 [value, cumulative_probability]。可选的 num_cells（默认 100）控制单元数。基于 boost::accumulators::tag::p_square_cumulative_distribution。</p>
+                        <p class="q-ma-md">示例：>> hist = boost_accumulators_p_square_cumulative_distribution(randn(1000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_p_square_quantile_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: q = boost_accumulators_p_square_quantile_and_variants(data, prob)</p>
+                        <p class="q-ma-md">Loadable Function: q = boost_accumulators_p_square_quantile_and_variants(data, prob, weights)</p>
+                        <p class="q-ma-md">使用 P^2 算法估计单个分位数。prob 为 (0,1) 内的标量概率值。可选的 weights 为权重向量。返回结构体，包含 .quantile 和（如果提供权重）.weighted_quantile 字段。基于 boost::accumulators::tag::p_square_quantile。</p>
+                        <p class="q-ma-md">示例：>> q = boost_accumulators_p_square_quantile_and_variants(randn(1000,1), 0.5)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_peaks_over_threshold_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_peaks_over_threshold_and_variants(data, threshold)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_peaks_over_threshold_and_variants(data, threshold, weights)</p>
+                        <p class="q-ma-md">使用 Peaks Over Threshold (POT) 方法估计分位数和尾均值。threshold 为阈值。返回结构体，包含 .pot_quantile、.pot_tail_mean 等字段。基于 boost::accumulators::tag::peaks_over_threshold。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_peaks_over_threshold_and_variants(randn(1000,1), 2.0)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_pot_quantile_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_pot_quantile_and_variants(data, alpha)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_pot_quantile_and_variants(data, alpha, threshold)</p>
+                        <p class="q-ma-md">基于 POT 方法的分位数估计。alpha 为分位数概率 (0,1)。可选 threshold 为固定阈值。返回结构体，包含 .quantile_threshold_value 和 .quantile_threshold_probability 字段。基于 boost::accumulators::tag::pot_quantile。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_pot_quantile_and_variants(randn(10000,1), 0.999, 3.0)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_pot_tail_mean</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_pot_tail_mean(data, threshold)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_pot_tail_mean(data, threshold, weights)</p>
+                        <p class="q-ma-md">基于 POT 方法的（一致性）尾均值估计，支持左右尾。threshold 为阈值。返回结构体，包含 .tail_mean_right 和 .tail_mean_left 等字段。基于 boost::accumulators::tag::pot_tail_mean。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_pot_tail_mean(randn(10000,1), 2.0)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_skewness</div>
+                        <p class="q-ma-md">Loadable Function: s = boost_accumulators_skewness(data)</p>
+                        <p class="q-ma-md">计算数据的偏度（skewness），衡量概率分布的不对称性。基于 boost::accumulators::tag::skewness。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_skewness([2, 7, 4, 9, 3]) 返回 0.40604</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_sum_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_sum_and_variants(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_sum_and_variants(data, weights)</p>
+                        <p class="q-ma-md">计算元素和及其变体。返回结构体，包含 .sum（加权和）、.count（元素个数）。如果未提供权重，还包含 .sum_kahan（Kahan 补偿求和）。如果提供权重，还包含 .sum_of_weights 和 .sum_of_variates 字段。基于 boost::accumulators::tag::sum。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_sum_and_variants([1, 2, 3]) 返回 r.sum=6, r.count=3</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_tail</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail(data, cache_size)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail(data, cache_size, tail_type)</p>
+                        <p class="q-ma-md">返回最大（right）或最小（left）的 N 个极值。可选的 cache_size（默认 10）指定保留极值数量。可选的 tail_type 为 'right'（默认）或 'left'。返回结构体，包含 .tail（极值向量）、.tail_type、.count 字段。基于 boost::accumulators::tag::tail。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_tail([8, 3, 1, 5, 9, 2], 3)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_coherent_tail_mean</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_coherent_tail_mean(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_coherent_tail_mean(data, cache_size)</p>
+                        <p class="q-ma-md">基于顺序统计量的（一致性）尾均值估计，支持左右尾。可选的 cache_size（默认 10000）指定尾缓存大小。返回结构体，包含 .coherent_tail_mean_right、.coherent_tail_mean_left、.tail_quantile_right、.tail_quantile_left 字段。基于 boost::accumulators::tag::coherent_tail_mean。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_coherent_tail_mean(randn(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_non_coherent_tail_mean</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_non_coherent_tail_mean(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_non_coherent_tail_mean(data, cache_size)</p>
+                        <p class="q-ma-md">基于顺序统计量的非一致性尾均值估计，支持左右尾。可选的 cache_size（默认 10000）指定尾缓存大小。返回结构体，包含 .non_coherent_tail_mean_right、.non_coherent_tail_mean_left、.tail_quantile_right、.tail_quantile_left 字段。基于 boost::accumulators::tag::non_coherent_tail_mean。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_non_coherent_tail_mean(randn(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_tail_quantile</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_quantile(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_quantile(data, cache_size)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_quantile(data, cache_size, tail_type)</p>
+                        <p class="q-ma-md">基于顺序统计量的尾分位数估计，支持左右尾。可选的 cache_size（默认 10000）指定尾缓存大小。可选的 tail_type 为 'right'（默认）或 'left'。返回结构体，包含 .tail_quantile 和 .tail_type 字段。基于 boost::accumulators::tag::tail_quantile。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_tail_quantile(randn(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_tail_variate</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_variate(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_variate(data, cache_size)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_variate(data, cache_size, tail_type)</p>
+                        <p class="q-ma-md">跟踪最大或最小 N 个样本的协变量。data 为 Nx2 矩阵，第一列为样本值，第二列为协变量。可选的 cache_size（默认 10）和 tail_type（'right' 或 'left'）。返回结构体，包含 .tail、.tail_variate、.tail_type、.count 字段。内部使用 boost::accumulators::tag::tail + std::multimap 手动追踪协变量，避免 Boost 1.85+ 中 tag::tail_variate 的模板实例化问题。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_tail_variate([8,3;5,7;9,2;3,6], 3)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_tail_variate_means_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_tail_variate_means_and_variants(data, cache_size)</p>
+                        <p class="q-ma-md">估计左右尾的绝对和相对尾协变量均值。data 为 NxM 矩阵，第一列为样本值，其余列为协变量。返回结构体，包含 .relative_tail_variate_means_right、.absolute_tail_variate_means_right、.relative_tail_variate_means_left、.absolute_tail_variate_means_left 字段。基于 boost::accumulators::tag::tail_variate_means。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_tail_variate_means_and_variants(randn(10,5), 5)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_variance_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_variance_and_variants(data)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_variance_and_variants(data, method)</p>
+                        <p class="q-ma-md">计算数据的方差，支持 lazy（延迟计算）和 immediate（迭代计算）两种方法。可选的 method 为 'lazy'（默认）或 'immediate'。返回结构体，包含 .variance、.mean、.count、.method 字段。基于 boost::accumulators::tag::variance。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_variance_and_variants([1,2,3,4,5]) 返回 r.variance=2, r.mean=3</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_covariance</div>
+                        <p class="q-ma-md">Loadable Function: c = boost_accumulators_weighted_covariance(data)</p>
+                        <p class="q-ma-md">Loadable Function: c = boost_accumulators_weighted_covariance(data, weights)</p>
+                        <p class="q-ma-md">计算两个变量之间的加权协方差。data 为 Nx2 矩阵，第一列为变量 X，第二列为变量 Y。可选的 weights 为权重向量。基于 boost::accumulators::tag::weighted_covariance。</p>
+                        <p class="q-ma-md">示例：>> c = boost_accumulators_weighted_covariance([1,2;1,4;2,3;6,1])</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_density</div>
+                        <p class="q-ma-md">Loadable Function: density = boost_accumulators_weighted_density(data, weights)</p>
+                        <p class="q-ma-md">Loadable Function: density = boost_accumulators_weighted_density(data, weights, cache_size, num_bins)</p>
+                        <p class="q-ma-md">估计数据的加权概率密度。返回 Nx2 矩阵，每行为 [value, weighted_density]。可选的 cache_size（默认 10000）和 num_bins（默认 100）控制密度估计。基于 boost::accumulators::tag::weighted_density。</p>
+                        <p class="q-ma-md">示例：>> d = boost_accumulators_weighted_density(randn(1000,1), rand(1000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_extended_p_square</div>
+                        <p class="q-ma-md">Loadable Function: quantiles = boost_accumulators_weighted_extended_p_square(data, probabilities, weights)</p>
+                        <p class="q-ma-md">使用加权扩展 P^2 算法计算多个分位数估计。data 为数值矩阵，probabilities 为 (0,1) 内的概率向量，weights 为权重向量。返回与概率向量对应的加权分位数估计。基于 boost::accumulators::tag::weighted_extended_p_square。</p>
+                        <p class="q-ma-md">示例：>> q = boost_accumulators_weighted_extended_p_square(randn(10000,1), [0.01,0.5,0.99], rand(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_kurtosis</div>
+                        <p class="q-ma-md">Loadable Function: k = boost_accumulators_weighted_kurtosis(data, weights)</p>
+                        <p class="q-ma-md">计算数据的加权峰度（kurtosis），衡量概率分布的尾重程度。weights 为权重向量。基于 boost::accumulators::tag::weighted_kurtosis。</p>
+                        <p class="q-ma-md">示例：>> boost_accumulators_weighted_kurtosis([2,7,4,9,3], [4,1,3,1,2]) 返回 0.58137</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_mean_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_mean_and_variants(data, weights)</p>
+                        <p class="q-ma-md">计算数据的加权均值及其变体。weights 为权重向量。返回结构体，包含 .weighted_mean（加权均值）、.weighted_mean_of_variates（协变量的加权均值）、.sum_of_weights（权重和）、.count（元素个数）字段。基于 boost::accumulators::tag::weighted_mean。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_mean_and_variants([10,6,4,6], [2,3,4,5]) 返回 r.weighted_mean=6.0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_median_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_median_and_variants(data, weights)</p>
+                        <p class="q-ma-md">使用三种不同加权算法计算加权中位数。weights 为权重向量。返回结构体，包含 .weighted_median_p_square（P^2 分位数算法）、.weighted_median_density（密度估计算法）、.weighted_median_cdist（累积分布算法）字段。基于 boost::accumulators::tag::weighted_median。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_median_and_variants(randn(1000,1), rand(1000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_moment</div>
+                        <p class="q-ma-md">Loadable Function: m = boost_accumulators_weighted_moment(data, weights, k)</p>
+                        <p class="q-ma-md">计算数据的加权 k 阶矩。weights 为权重向量，k 为 1-5 的正整数。加权 k 阶矩定义为 sum(w_i * x_i^k) / sum(w_i)。基于 boost::accumulators::tag::weighted_moment。</p>
+                        <p class="q-ma-md">示例：>> m = boost_accumulators_weighted_moment([2.1,2.7,1.8], [0.7,1.4,0.9], 2) 返回 5.403</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_p_square_cumulative_distribution</div>
+                        <p class="q-ma-md">Loadable Function: hist = boost_accumulators_weighted_p_square_cumulative_distribution(data, weights)</p>
+                        <p class="q-ma-md">Loadable Function: hist = boost_accumulators_weighted_p_square_cumulative_distribution(data, weights, num_cells)</p>
+                        <p class="q-ma-md">使用加权 P^2 算法估计累积分布函数。weights 为权重向量。可选的 num_cells（默认 100）指定 bin 数量。返回 Nx2 矩阵，每行为 [value, cumulative_probability]。基于 boost::accumulators::tag::weighted_p_square_cumulative_distribution。</p>
+                        <p class="q-ma-md">示例：>> hist = boost_accumulators_weighted_p_square_cumulative_distribution(randn(10000,1), rand(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_p_square_quantile_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: q = boost_accumulators_weighted_p_square_quantile_and_variants(data, weights, prob)</p>
+                        <p class="q-ma-md">使用加权 P^2 算法估计单个分位数。weights 为权重向量，prob 为 (0,1) 内的概率值。返回估计的分位数值。基于 boost::accumulators::tag::weighted_p_square_quantile。</p>
+                        <p class="q-ma-md">示例：>> q = boost_accumulators_weighted_p_square_quantile_and_variants(rand(100000,1), rand(100000,1), 0.5)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_peaks_over_threshold_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_peaks_over_threshold_and_variants(data, threshold, weights)</p>
+                        <p class="q-ma-md">使用 Peaks Over Threshold (POT) 方法估计加权分位数和加权尾均值。threshold 为阈值，weights 为权重向量。返回结构体，包含 .pot_quantile 和 .pot_tail_mean 字段。基于 boost::accumulators::tag::weighted_peaks_over_threshold。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_peaks_over_threshold_and_variants(randn(1000,1), 2.0, rand(1000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_skewness</div>
+                        <p class="q-ma-md">Loadable Function: s = boost_accumulators_weighted_skewness(data, weights)</p>
+                        <p class="q-ma-md">计算数据的加权偏度（skewness），衡量概率分布的不对称性。偏度定义为三阶中心矩与二阶中心矩（方差）的 3/2 次幂之比。weights 为权重向量。基于 boost::accumulators::tag::weighted_skewness。</p>
+                        <p class="q-ma-md">示例：>> s = boost_accumulators_weighted_skewness([2,7,4,9,3], [4,1,3,1,2]) 返回 1.3071</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_sum_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_sum_and_variants(data, weights)</p>
+                        <p class="q-ma-md">计算加权和及其变体。weights 为权重向量。返回结构体，包含 .weighted_sum（加权和）、.sum_of_weights（权重和）、.weighted_sum_of_variates（协变量的加权和）、.weighted_sum_kahan（Kahan 补偿加权和）、.count（元素个数）字段。基于 boost::accumulators::tag::weighted_sum。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_sum_and_variants([1,2,4], [2,3,6]) 返回 r.weighted_sum=32</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_non_coherent_weighted_tail_mean</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_non_coherent_weighted_tail_mean(data, weights)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_non_coherent_weighted_tail_mean(data, weights, cache_size)</p>
+                        <p class="q-ma-md">基于顺序统计量的非一致性加权尾均值估计，支持左右尾。weights 为权重向量。可选的 cache_size（默认 10000）指定尾缓存大小。返回结构体，包含 .non_coherent_tail_mean_right、.non_coherent_tail_mean_left、.tail_quantile_right、.tail_quantile_left 字段。基于 boost::accumulators::tag::non_coherent_tail_mean（加权版本）。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_non_coherent_weighted_tail_mean(randn(10000,1), rand(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_tail_quantile</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_tail_quantile(data, weights)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_tail_quantile(data, weights, cache_size)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_tail_quantile(data, weights, cache_size, tail_type)</p>
+                        <p class="q-ma-md">基于顺序统计量的加权尾分位数估计，支持左右尾。weights 为权重向量。可选的 cache_size（默认 10000）指定尾缓存大小。可选的 tail_type 为 'right'（默认）或 'left'。返回结构体，包含 .tail_quantile 和 .tail_type 字段。基于 boost::accumulators::tag::tail_quantile（加权版本）。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_tail_quantile(randn(10000,1), rand(10000,1))</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_tail_variate_means_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_tail_variate_means_and_variants(data, weights)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_tail_variate_means_and_variants(data, weights, cache_size)</p>
+                        <p class="q-ma-md">估计左右尾的绝对和相对加权尾协变量均值。data 为 NxM 矩阵，第一列为样本值，其余列为协变量。weights 为权重向量。返回结构体，包含 .relative_tail_variate_means_right、.absolute_tail_variate_means_right、.relative_tail_variate_means_left、.absolute_tail_variate_means_left 字段。基于 boost::accumulators::tag::tail_variate_means（加权版本）。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_tail_variate_means_and_variants(randn(10,5), rand(10,1), 5)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_accumulators_weighted_variance_and_variants</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_variance_and_variants(data, weights)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_accumulators_weighted_variance_and_variants(data, weights, method)</p>
+                        <p class="q-ma-md">计算数据的加权方差，支持 lazy（延迟计算）和 immediate（迭代计算）两种方法。weights 为权重向量。可选的 method 为 'lazy'（默认）或 'immediate'。返回结构体，包含 .variance、.weighted_mean、.count、.method 字段。基于 boost::accumulators::tag::weighted_variance。</p>
+                        <p class="q-ma-md">示例：>> r = boost_accumulators_weighted_variance_and_variants([1,2,3,4,5], [2,3,1,4,1])</p>
+                        <q-separator></q-separator>
+
+                        <div id="boost_chrono" class="text-h5 q-ma-md text-red-10">Boost Chrono — 时间间隔运算</div>
+                        <p class="q-ma-md">以下函数基于 Boost C++ Libraries 的 Chrono 库，提供时间间隔（duration）的创建、运算和比较。每个函数通过 <value, unit> 对指定时间间隔，unit 为字符串：'hours'、'minutes'、'seconds'、'milliseconds'、'microseconds'、'nanoseconds'。</p>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_count</div>
+                        <p class="q-ma-md">Loadable Function: cnt = boost_chrono_duration_count(value, unit)</p>
+                        <p class="q-ma-md">返回指定时间间隔的 tick 计数（以纳秒为单位）。基于 boost::chrono::duration::count()。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_count(5, 'seconds') → 5000000000</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_count(1000, 'milliseconds') → 1000000000</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_add</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_chrono_duration_add(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">将两个时间间隔相加。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::operator+。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_add(3, 'milliseconds', 10, 'microseconds')</p>
+                        <p class="q-ma-md">示例：>> r.count → 3010000, r.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_minus</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_chrono_duration_minus(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">将第一个时间间隔减去第二个。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::operator-。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_minus(10, 'seconds', 3, 'seconds')</p>
+                        <p class="q-ma-md">示例：>> r.count → 7000000000, r.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_multiply</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_chrono_duration_multiply(value, unit, factor)</p>
+                        <p class="q-ma-md">将时间间隔乘以一个标量因子。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::operator*。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_multiply(5, 'seconds', 2)</p>
+                        <p class="q-ma-md">示例：>> r.count → 10000000000, r.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_divide_by_times</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_chrono_duration_divide_by_times(value, unit, divisor)</p>
+                        <p class="q-ma-md">将时间间隔除以一个标量除数。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::operator/。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_divide_by_times(10, 'seconds', 2)</p>
+                        <p class="q-ma-md">示例：>> r.count → 5000000000, r.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_divide_by_duration</div>
+                        <p class="q-ma-md">Loadable Function: ratio = boost_chrono_duration_divide_by_duration(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">将第一个时间间隔除以第二个，返回比值（标量）。基于 boost::chrono::operator/。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_divide_by_duration(10, 'seconds', 2, 'seconds')</p>
+                        <p class="q-ma-md">示例：>> r → 5.0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_remainder_by_times</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_chrono_duration_remainder_by_times(value, unit, divisor)</p>
+                        <p class="q-ma-md">返回时间间隔除以标量的余数。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::operator%。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_remainder_by_times(10, 'seconds', 3)</p>
+                        <p class="q-ma-md">示例：>> r.count → 1000000000, r.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_remainder_by_duration</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_chrono_duration_remainder_by_duration(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">返回第一个时间间隔除以第二个的余数。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::operator%。</p>
+                        <p class="q-ma-md">示例：>> r = boost_chrono_duration_remainder_by_duration(10, 'seconds', 3, 'seconds')</p>
+                        <p class="q-ma-md">示例：>> r.count → 1000000000, r.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_eq</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_chrono_duration_eq(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">比较两个时间间隔是否相等（转换为纳秒后比较）。返回逻辑值。基于 boost::chrono::operator==。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_eq(60, 'seconds', 1, 'minutes') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_eq(1000, 'milliseconds', 1, 'seconds') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_ne</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_chrono_duration_ne(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">比较两个时间间隔是否不相等。返回逻辑值。基于 boost::chrono::operator!=。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_ne(60, 'seconds', 1, 'minutes') → 0 (false)</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_ne(61, 'seconds', 1, 'minutes') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_lt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_chrono_duration_lt(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">比较两个时间间隔是否小于（持续时间更短）。返回逻辑值。基于 boost::chrono::operator&lt;。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_lt(500, 'milliseconds', 1, 'seconds') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_lt(1, 'minutes', 30, 'seconds') → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_le</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_chrono_duration_le(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">比较两个时间间隔是否小于等于。返回逻辑值。基于 boost::chrono::operator&lt;=。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_le(1000, 'milliseconds', 1, 'seconds') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_le(31, 'seconds', 1, 'minutes') → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_gt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_chrono_duration_gt(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">比较两个时间间隔是否大于（持续时间更长）。返回逻辑值。基于 boost::chrono::operator&gt;。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_gt(2, 'minutes', 30, 'seconds') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_gt(500, 'milliseconds', 1, 'seconds') → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_ge</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_chrono_duration_ge(value1, unit1, value2, unit2)</p>
+                        <p class="q-ma-md">比较两个时间间隔是否大于等于。返回逻辑值。基于 boost::chrono::operator&gt;=。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_ge(1, 'minutes', 60, 'seconds') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_ge(30, 'seconds', 1, 'minutes') → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_duration_cast</div>
+                        <p class="q-ma-md">Loadable Function: value = boost_chrono_duration_cast(count, unit, target_unit)</p>
+                        <p class="q-ma-md">将时间间隔从一个单位转换为另一个单位。输入为计数和原单位，target_unit 为目标单位。返回目标单位下的计数值（浮点数）。基于 boost::chrono::duration_cast。</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_cast(3600, 'seconds', 'hours') → 1.0</p>
+                        <p class="q-ma-md">示例：>> boost_chrono_duration_cast(1000, 'milliseconds', 'seconds') → 1.0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_system_clock_now</div>
+                        <p class="q-ma-md">Loadable Function: time = boost_chrono_system_clock_now()</p>
+                        <p class="q-ma-md">获取系统时钟的当前时间。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。系统时钟通常表示自 1970-01-01 UTC 以来的纳秒数。基于 boost::chrono::system_clock::now()。</p>
+                        <p class="q-ma-md">示例：>> t = boost_chrono_system_clock_now()</p>
+                        <p class="q-ma-md">示例：>> t.count → 1700000000000000000 (示例值), t.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_steady_clock_now</div>
+                        <p class="q-ma-md">Loadable Function: time = boost_chrono_steady_clock_now()</p>
+                        <p class="q-ma-md">获取稳态时钟的当前时间。稳态时钟是单调的，不受系统时间调整影响。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::steady_clock::now()。</p>
+                        <p class="q-ma-md">示例：>> t = boost_chrono_steady_clock_now()</p>
+                        <p class="q-ma-md">示例：>> t.count → 1234567890000000 (示例值), t.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_high_resolution_clock_now</div>
+                        <p class="q-ma-md">Loadable Function: time = boost_chrono_high_resolution_clock_now()</p>
+                        <p class="q-ma-md">获取高分辨率时钟的当前时间（通常具有最短的 tick 周期）。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。基于 boost::chrono::high_resolution_clock::now()。</p>
+                        <p class="q-ma-md">示例：>> t = boost_chrono_high_resolution_clock_now()</p>
+                        <p class="q-ma-md">示例：>> t.count → 1234567890000000 (示例值), t.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_process_cpu_clock_now</div>
+                        <p class="q-ma-md">Loadable Function: time = boost_process_cpu_clock_now()</p>
+                        <p class="q-ma-md">获取当前进程的 CPU 时钟时间。返回结构体，包含 .real（挂钟纳秒）、.user（用户态 CPU 纳秒）、.system（内核态 CPU 纳秒）和 .total（总 CPU 纳秒，即 user+system）。基于 boost::chrono::process_cpu_clock::now()。</p>
+                        <p class="q-ma-md">示例：>> t = boost_process_cpu_clock_now()</p>
+                        <p class="q-ma-md">示例：>> t.real → 200000000, t.user → 100000000, t.system → 50000000, t.total → 150000000</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_thread_clock_now</div>
+                        <p class="q-ma-md">Loadable Function: time = boost_thread_clock_now()</p>
+                        <p class="q-ma-md">获取当前线程的 CPU 时钟时间。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。注意：如果平台不支持线程时钟，将抛出错误。基于 boost::chrono::thread_clock::now()。</p>
+                        <p class="q-ma-md">示例：>> t = boost_thread_clock_now()</p>
+                        <p class="q-ma-md">示例：>> t.count → 50000000, t.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_system_clock_duration</div>
+                        <p class="q-ma-md">Loadable Function: dur = boost_chrono_system_clock_duration()</p>
+                        <p class="q-ma-md">测量调用函数期间经过的实时时间（挂钟时间），基于 boost::chrono::system_clock。进入函数时获取一次系统时钟，进入无限循环等待用户中断；用户按下 Ctrl+C 退出时再次获取系统时钟，返回两次时钟的差值（纳秒）。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。</p>
+                        <p class="q-ma-md">示例：>> dur = boost_chrono_system_clock_duration()</p>
+                        <p class="q-ma-md">示例：按 Ctrl+C 后 >> dur.count → 12345678900 (示例值), dur.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_steady_clock_duration</div>
+                        <p class="q-ma-md">Loadable Function: dur = boost_chrono_steady_clock_duration()</p>
+                        <p class="q-ma-md">测量调用函数期间经过的稳态时间（单调时钟，不受系统时间调整影响），基于 boost::chrono::steady_clock。进入无限循环等待用户按下 Ctrl+C 退出。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。</p>
+                        <p class="q-ma-md">示例：>> dur = boost_chrono_steady_clock_duration()</p>
+                        <p class="q-ma-md">示例：按 Ctrl+C 后 >> dur.count → 12345678900 (示例值), dur.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_chrono_high_resolution_clock_duration</div>
+                        <p class="q-ma-md">Loadable Function: dur = boost_chrono_high_resolution_clock_duration()</p>
+                        <p class="q-ma-md">测量调用函数期间经过的高分辨率时间（通常具有最短的 tick 周期），基于 boost::chrono::high_resolution_clock。进入无限循环等待用户按下 Ctrl+C 退出。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。</p>
+                        <p class="q-ma-md">示例：>> dur = boost_chrono_high_resolution_clock_duration()</p>
+                        <p class="q-ma-md">示例：按 Ctrl+C 后 >> dur.count → 12345678900 (示例值), dur.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_process_cpu_clock_duration</div>
+                        <p class="q-ma-md">Loadable Function: dur = boost_process_cpu_clock_duration()</p>
+                        <p class="q-ma-md">测量调用函数期间经过的进程 CPU 时间，基于 boost::chrono::process_cpu_clock。进入无限循环等待用户按下 Ctrl+C 退出。返回结构体，包含 .real（挂钟纳秒）、.user（用户态 CPU 纳秒）、.system（内核态 CPU 纳秒）和 .total（总 CPU 纳秒，即 user+system）。</p>
+                        <p class="q-ma-md">示例：>> dur = boost_process_cpu_clock_duration()</p>
+                        <p class="q-ma-md">示例：按 Ctrl+C 后 >> dur.real → 120000000, dur.user → 50000000, dur.system → 30000000, dur.total → 80000000</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_thread_clock_duration</div>
+                        <p class="q-ma-md">Loadable Function: dur = boost_thread_clock_duration()</p>
+                        <p class="q-ma-md">测量调用函数期间经过的线程 CPU 时间，基于 boost::chrono::thread_clock。进入无限循环等待用户按下 Ctrl+C 退出。返回结构体，包含 .count（纳秒计数）和 .unit（单位）。注意：如果平台不支持线程时钟，将抛出错误。</p>
+                        <p class="q-ma-md">示例：>> dur = boost_thread_clock_duration()</p>
+                        <p class="q-ma-md">示例：按 Ctrl+C 后 >> dur.count → 25000000, dur.unit → 'nanoseconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_fmt_duration</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_time_fmt_duration(format, count, unit)</p>
+                        <p class="q-ma-md">使用给定的格式字符串格式化 duration 时间间隔。format 为 strftime 风格格式字符串，count 为数值，unit 为单位字符串（hours, minutes, seconds, milliseconds, microseconds, nanoseconds）。基于 boost::chrono::time_fmt I/O 操作器。</p>
+                        <p class="q-ma-md">示例：>> boost_time_fmt_duration('%H:%M:%S', 3661, 'seconds') → '01:01:01'</p>
+                        <p class="q-ma-md">示例：>> boost_time_fmt_duration('%M minutes %S seconds', 90, 'seconds') → '01 minutes 30 seconds'</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_fmt_system_clock</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_time_fmt_system_clock(format)</p>
+                        <p class="q-ma-md">使用给定的格式字符串格式化当前系统时钟时间。format 为 strftime 风格格式字符串（如 %Y-%m-%d %H:%M:%S）。基于 boost::chrono::time_fmt I/O 操作器和 boost::chrono::system_clock::now()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_fmt_system_clock('%Y-%m-%d %H:%M:%S') → '2025-06-01 12:34:56'</p>
+                        <p class="q-ma-md">示例：>> boost_time_fmt_system_clock('%F') → '2025-06-01'</p>
+                        <q-separator></q-separator>
+
+                        <div id="boost_property_tree" class="text-h5 q-ma-md text-red-10">Boost.PropertyTree 文件格式转换</div>
+                        <p class="q-ma-md">以下函数基于 Boost C++ Libraries 的 PropertyTree 库，提供 INFO、INI、JSON 和 XML 四种格式之间的相互转换功能。所有转换通过中间属性树（property tree）完成，支持层次化数据的读写与转换。</p>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_info_file_to_ini_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_info_file_to_ini_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 INFO 格式文件并保存为 INI 格式文件。两个参数均为文件路径字符串。基于 boost::property_tree::read_info() 和 boost::property_tree::write_ini()。</p>
+                        <p class="q-ma-md">示例：>> boost_info_file_to_ini_file("config.info", "config.ini")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ini_file_to_info_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ini_file_to_info_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 INI 格式文件并保存为 INFO 格式文件。基于 boost::property_tree::read_ini() 和 boost::property_tree::write_info()。</p>
+                        <p class="q-ma-md">示例：>> boost_ini_file_to_info_file("config.ini", "config.info")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_info_file_to_json_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_info_file_to_json_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 INFO 格式文件并保存为 JSON 格式文件。基于 boost::property_tree::read_info() 和 boost::property_tree::write_json()。</p>
+                        <p class="q-ma-md">示例：>> boost_info_file_to_json_file("config.info", "config.json")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_json_file_to_info_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_json_file_to_info_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 JSON 格式文件并保存为 INFO 格式文件。基于 boost::property_tree::read_json() 和 boost::property_tree::write_info()。</p>
+                        <p class="q-ma-md">示例：>> boost_json_file_to_info_file("config.json", "config.info")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_info_file_to_xml_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_info_file_to_xml_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 INFO 格式文件并保存为 XML 格式文件。基于 boost::property_tree::read_info() 和 boost::property_tree::write_xml()。</p>
+                        <p class="q-ma-md">示例：>> boost_info_file_to_xml_file("config.info", "config.xml")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_xml_file_to_info_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_xml_file_to_info_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 XML 格式文件并保存为 INFO 格式文件。基于 boost::property_tree::read_xml() 和 boost::property_tree::write_info()。</p>
+                        <p class="q-ma-md">示例：>> boost_xml_file_to_info_file("config.xml", "config.info")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ini_file_to_json_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ini_file_to_json_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 INI 格式文件并保存为 JSON 格式文件。基于 boost::property_tree::read_ini() 和 boost::property_tree::write_json()。</p>
+                        <p class="q-ma-md">示例：>> boost_ini_file_to_json_file("config.ini", "config.json")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_json_file_to_ini_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_json_file_to_ini_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 JSON 格式文件并保存为 INI 格式文件。基于 boost::property_tree::read_json() 和 boost::property_tree::write_ini()。</p>
+                        <p class="q-ma-md">示例：>> boost_json_file_to_ini_file("config.json", "config.ini")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ini_file_to_xml_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ini_file_to_xml_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 INI 格式文件并保存为 XML 格式文件。基于 boost::property_tree::read_ini() 和 boost::property_tree::write_xml()。</p>
+                        <p class="q-ma-md">示例：>> boost_ini_file_to_xml_file("config.ini", "config.xml")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_xml_file_to_ini_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_xml_file_to_ini_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 XML 格式文件并保存为 INI 格式文件。基于 boost::property_tree::read_xml() 和 boost::property_tree::write_ini()。</p>
+                        <p class="q-ma-md">示例：>> boost_xml_file_to_ini_file("config.xml", "config.ini")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_json_file_to_xml_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_json_file_to_xml_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 JSON 格式文件并保存为 XML 格式文件。基于 boost::property_tree::read_json() 和 boost::property_tree::write_xml()。</p>
+                        <p class="q-ma-md">示例：>> boost_json_file_to_xml_file("config.json", "config.xml")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_xml_file_to_json_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_xml_file_to_json_file(src_file, dst_file)</p>
+                        <p class="q-ma-md">读取 XML 格式文件并保存为 JSON 格式文件。基于 boost::property_tree::read_xml() 和 boost::property_tree::write_json()。</p>
+                        <p class="q-ma-md">示例：>> boost_xml_file_to_json_file("config.xml", "config.json")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_save_as_info_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_save_as_info_file(data, filename)</p>
+                        <p class="q-ma-md">将 Octave 数据（结构体、数值、字符串或元胞数组）保存为 INFO 格式文件。数据自动转换为 Boost.PropertyTree 写入文件。基于 boost::property_tree::write_info()。</p>
+                        <p class="q-ma-md">注意：字符串类型的字段值会优先于数值类型处理，避免 "invalid conversion from string to real N-D array" 错误。支持完整的 parse→save 往返操作。</p>
+                        <p class="q-ma-md">示例：>> s = struct("name", "Alice", "age", 30); >> boost_save_as_info_file(s, "data.info")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_save_as_ini_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_save_as_ini_file(data, filename)</p>
+                        <p class="q-ma-md">将 Octave 数据（结构体、数值、字符串或元胞数组）保存为 INI 格式文件。基于 boost::property_tree::write_ini()。</p>
+                        <p class="q-ma-md">注意：字符串类型的字段值会优先于数值类型处理，避免 "invalid conversion from string to real N-D array" 错误。支持完整的 parse→save 往返操作。</p>
+                        <p class="q-ma-md">示例：>> s = struct("name", "Alice", "age", 30); >> boost_save_as_ini_file(s, "data.ini")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_save_as_json_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_save_as_json_file(data, filename)</p>
+                        <p class="q-ma-md">将 Octave 数据（结构体、数值、字符串或元胞数组）保存为 JSON 格式文件。基于 boost::property_tree::write_json()。</p>
+                        <p class="q-ma-md">注意：字符串类型的字段值会优先于数值类型处理，避免 "invalid conversion from string to real N-D array" 错误。支持完整的 parse→save 往返操作。JSON 数组（元胞数组）会被正确保存为 JSON 数组格式。</p>
+                        <p class="q-ma-md">示例：>> s = struct("name", "Alice", "score", 95.5); >> boost_save_as_json_file(s, "data.json")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_save_as_xml_file</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_save_as_xml_file(data, filename)</p>
+                        <p class="q-ma-md">将 Octave 数据（结构体、数值、字符串或元胞数组）保存为 XML 格式文件。基于 boost::property_tree::write_xml()。</p>
+                        <p class="q-ma-md">注意：字符串类型的字段值会优先于数值类型处理，避免 "invalid conversion from string to real N-D array" 错误。支持完整的 parse→save 往返操作。</p>
+                        <p class="q-ma-md">示例：>> s = struct("name", "Alice", "age", 30); >> boost_save_as_xml_file(s, "data.xml")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_parse_from_info_file</div>
+                        <p class="q-ma-md">Loadable Function: data = boost_parse_from_info_file(filename)</p>
+                        <p class="q-ma-md">读取 INFO 格式文件并解析为 Octave 数据结构体。基于 boost::property_tree::read_info()。</p>
+                        <p class="q-ma-md">注意：若节点检测为数组（所有子节点键名为空），则返回元胞数组；否则返回结构体。</p>
+                        <p class="q-ma-md">示例：>> data = boost_parse_from_info_file("data.info")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_parse_from_ini_file</div>
+                        <p class="q-ma-md">Loadable Function: data = boost_parse_from_ini_file(filename)</p>
+                        <p class="q-ma-md">读取 INI 格式文件并解析为 Octave 数据结构体。基于 boost::property_tree::read_ini()。</p>
+                        <p class="q-ma-md">注意：若节点检测为数组（所有子节点键名为空），则返回元胞数组；否则返回结构体。</p>
+                        <p class="q-ma-md">示例：>> data = boost_parse_from_ini_file("data.ini")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_parse_from_json_file</div>
+                        <p class="q-ma-md">Loadable Function: data = boost_parse_from_json_file(filename)</p>
+                        <p class="q-ma-md">读取 JSON 格式文件并解析为 Octave 数据结构体。基于 boost::property_tree::read_json()。</p>
+                        <p class="q-ma-md">注意：JSON 数组会被正确解析为 Octave 元胞数组；JSON 对象则解析为结构体。<br>例如 JSON 数组 ["item1","item2","item3"] 将返回 3x1 元胞数组，而非仅保留最后一个元素。</p>
+                        <p class="q-ma-md">示例：>> data = boost_parse_from_json_file("data.json")</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_parse_from_xml_file</div>
+                        <p class="q-ma-md">Loadable Function: data = boost_parse_from_xml_file(filename)</p>
+                        <p class="q-ma-md">读取 XML 格式文件并解析为 Octave 数据结构体。基于 boost::property_tree::read_xml()。</p>
+                        <p class="q-ma-md">注意：若节点检测为数组（所有子节点键名为空），则返回元胞数组；否则返回结构体。</p>
+                        <p class="q-ma-md">示例：>> data = boost_parse_from_xml_file("data.xml")</p>
+                        <q-separator></q-separator>
+
+                        <div id="boost_thread" class="text-h5 q-ma-md text-red-10">Boost.Thread 多线程处理</div>
+                        <p class="q-ma-md">以下函数基于 Boost C++ Libraries 的 Thread 库，提供多线程并行执行 Octave 代码的能力。支持并行运行脚本文件、调用函数、eval 表达式和 feval 表达式。每个线程的输出将被自动捕获并标记线程 ID。</p>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_run_octave_file</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_run_octave_file(filename)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_run_octave_file(filename, num_threads)</p>
+                        <p class="q-ma-md">启动多个 boost::thread，并行执行指定的 Octave 脚本文件。num_threads 默认为 1。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。返回结构体数组，包含每个线程的 thread_id（boost::thread::id 字符串）、output（捕获的输出）和 status（状态码）。基于 boost::thread 和 Octave 的 source() 函数。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_run_octave_file("myscript.m", 4)</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_run_octave_file("test.m", 2)</p>
+                        <p class="q-ma-md">示例：>> result(1)</p>
+                        <p class="q-ma-md">示例：>> result(2)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_call_octave_function</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_function(func_handle)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_function(func_handle, num_threads)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_function(func_handle, num_threads, args)</p>
+                        <p class="q-ma-md">启动多个 boost::thread，并行调用指定的 Octave 函数句柄。func_handle 为函数句柄（如 @sin）。num_threads 默认为 1，args 默认为空元胞数组。args 为元胞数组，包含传递给函数的参数。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。返回结构体数组，包含每个线程的 thread_id、output、result（函数返回值）和 status。基于 boost::thread 和 Octave 的 evalc() 函数，通过单次 evalc 调用同时捕获 output 和 result，确保对 rand() 等非确定性函数，output 和 result 完全一致。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_call_octave_function(@rand, 4, {3, 3})</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_call_octave_function(@sin, 2, {pi/2})</p>
+                        <p class="q-ma-md">示例：>> result(1)</p>
+                        <p class="q-ma-md">示例：>> result(2)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_eval_octave_expression</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_eval_octave_expression(expression)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_eval_octave_expression(expression, num_threads)</p>
+                        <p class="q-ma-md">启动多个 boost::thread，并行 eval() 指定的 Octave 表达式字符串。num_threads 默认为 1。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。返回结构体数组，包含每个线程的 thread_id、output、result（表达式返回值字符串）和 status。基于 boost::thread 和 Octave 的 eval() 函数。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_eval_octave_expression("rand()", 4)</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_eval_octave_expression("sum(rand(1,10))", 3)</p>
+                        <p class="q-ma-md">示例：>> result(1)</p>
+                        <p class="q-ma-md">示例：>> result(2)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_feval_octave_expression</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expression(funcname)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expression(funcname, num_threads)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expression(funcname, num_threads, args)</p>
+                        <p class="q-ma-md">启动多个 boost::thread，并行 feval() 指定的 Octave 函数。num_threads 默认为 1，args 默认为空元胞数组。args 为元胞数组，包含传递给 feval 的参数。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。返回结构体数组，包含每个线程的 thread_id、output、result（函数返回值）和 status。基于 boost::thread 和 Octave 的 evalc() 函数，通过单次 evalc 调用同时捕获 output 和 result，确保对 rand() 等非确定性函数，output 和 result 完全一致。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_feval_octave_expression("sin", 4, {pi/2})</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_feval_octave_expression("cos", 2, {0})</p>
+                        <p class="q-ma-md">示例：>> result(1)</p>
+                        <p class="q-ma-md">示例：>> result(2)</p>
+                        <q-separator></q-separator>
+
+                        <div id="boost_date_time" class="text-h5 q-ma-md text-red-10">Boost.Date_Time 日期处理</div>
+                        <p class="q-ma-md">以下函数基于 Boost C++ Libraries 的 Date_Time 库，提供公历（Gregorian）日期的高性能处理能力。日期可以通过多种方式表示：结构体（.year/.month/.day）、字符串（"YYYY-MM-DD"）、特殊值字符串（"neg_infin"/"pos_infin"/"not_a_date_time"）或三个独立数值（year, month, day）。</p>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_year</div>
+                        <p class="q-ma-md">Loadable Function: y = boost_date_get_year(date)</p>
+                        <p class="q-ma-md">从 Boost.Gregorian 日期中提取年份。date 参数支持结构体、字符串、特殊值或三个独立数值参数。基于 boost::gregorian::date::year()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_get_year(2002, 1, 10) → 2002</p>
+                        <p class="q-ma-md">示例：>> boost_date_get_year(struct('year',2002,'month',1,'day',10)) → 2002</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_month</div>
+                        <p class="q-ma-md">Loadable Function: m = boost_date_get_month(date)</p>
+                        <p class="q-ma-md">从 Boost.Gregorian 日期中提取月份（1-12）。基于 boost::gregorian::date::month()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_get_month(2002, 1, 10) → 1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_day</div>
+                        <p class="q-ma-md">Loadable Function: d = boost_date_get_day(date)</p>
+                        <p class="q-ma-md">从 Boost.Gregorian 日期中提取日期（1-31）。基于 boost::gregorian::date::day()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_get_day(2002, 1, 10) → 10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_year_month_day</div>
+                        <p class="q-ma-md">Loadable Function: ymd = boost_date_get_year_month_day(date)</p>
+                        <p class="q-ma-md">返回包含年、月、日的结构体，字段名为 .year、.month、.day。基于 boost::gregorian::date::year_month_day()。</p>
+                        <p class="q-ma-md">示例：>> ymd = boost_date_get_year_month_day(2002, 1, 10) → ymd.year = 2002, ymd.month = 1, ymd.day = 10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_day_of_week</div>
+                        <p class="q-ma-md">Loadable Function: dow = boost_date_get_day_of_week(date)</p>
+                        <p class="q-ma-md">返回星期几（0=Sunday, 1=Monday, ..., 6=Saturday）。基于 boost::gregorian::date::day_of_week()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_get_day_of_week(2002, 1, 10) → 4 (Thursday)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_day_of_year</div>
+                        <p class="q-ma-md">Loadable Function: doy = boost_date_get_day_of_year(date)</p>
+                        <p class="q-ma-md">返回一年中的第几天（1-366）。基于 boost::gregorian::date::day_of_year()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_get_day_of_year(2000, 1, 10) → 10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_get_end_of_month</div>
+                        <p class="q-ma-md">Loadable Function: eom = boost_date_get_end_of_month(date)</p>
+                        <p class="q-ma-md">返回给定日期所在月份的最后一天。返回结构体，包含 .year、.month、.day 字段。基于 boost::gregorian::date::end_of_month()。</p>
+                        <p class="q-ma-md">示例：>> eom = boost_date_get_end_of_month(2000, 1, 10) → eom.year = 2000, eom.month = 1, eom.day = 31</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_is_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_is_infinity(date)</p>
+                        <p class="q-ma-md">检查日期是否为无穷大（正无穷或负无穷）。返回逻辑值。基于 boost::gregorian::date::is_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_infinity('pos_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_infinity(2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_is_neg_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_is_neg_infinity(date)</p>
+                        <p class="q-ma-md">检查日期是否为负无穷大。返回逻辑值。基于 boost::gregorian::date::is_neg_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_neg_infinity('neg_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_neg_infinity(2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_is_pos_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_is_pos_infinity(date)</p>
+                        <p class="q-ma-md">检查日期是否为正无穷大。返回逻辑值。基于 boost::gregorian::date::is_pos_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_pos_infinity('pos_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_pos_infinity(2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_is_not_a_date</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_is_not_a_date(date)</p>
+                        <p class="q-ma-md">检查日期是否为无效日期（not-a-date-time）。返回逻辑值。基于 boost::gregorian::date::is_not_a_date()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_not_a_date('not_a_date_time') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_not_a_date(2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_is_special</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_is_special(date)</p>
+                        <p class="q-ma-md">检查日期是否为特殊值（pos_infin、neg_infin 或 not_a_date_time）。返回逻辑值。基于 boost::gregorian::date::is_special()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_special('pos_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_special('not_a_date_time') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_is_special(2005, 3, 1) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_modjulian_day</div>
+                        <p class="q-ma-md">Loadable Function: mjd = boost_date_modjulian_day(date)</p>
+                        <p class="q-ma-md">返回修改的儒略日（Modified Julian Day）编号，即儒略日减去 2400000.5。基于 boost::gregorian::date::modjulian_day()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_modjulian_day(2002, 1, 10) → 52284</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_julian_day</div>
+                        <p class="q-ma-md">Loadable Function: jd = boost_date_julian_day(date)</p>
+                        <p class="q-ma-md">返回儒略日（Julian Day）编号。基于 boost::gregorian::date::julian_day()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_julian_day(2002, 1, 10) → 2452284</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_week_number</div>
+                        <p class="q-ma-md">Loadable Function: wn = boost_date_week_number(date)</p>
+                        <p class="q-ma-md">返回 ISO 8601 周编号（1-53）。基于 boost::gregorian::date::week_number()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_week_number(2002, 1, 10) → 2</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_end_of_month</div>
+                        <p class="q-ma-md">Loadable Function: eom = boost_date_end_of_month(date)</p>
+                        <p class="q-ma-md">返回给定日期所在月份的最后一天。返回结构体，包含 .year、.month、.day 字段。基于 boost::gregorian::date::end_of_month()。</p>
+                        <p class="q-ma-md">示例：>> eom = boost_date_end_of_month(2000, 2, 1) → eom.year = 2000, eom.month = 2, eom.day = 29</p>
+                        <p class="q-ma-md">示例：>> eom = boost_date_end_of_month(2001, 2, 1) → eom.year = 2001, eom.month = 2, eom.day = 28</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_to_simple_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_date_to_simple_string(date)</p>
+                        <p class="q-ma-md">将日期转换为 "YYYY-mmm-DD" 格式字符串，mmm 为三位月份缩写（如 "2002-Jan-01"）。基于 boost::gregorian::to_simple_string()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_to_simple_string(2002, 1, 1) → "2002-Jan-01"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_to_iso_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_date_to_iso_string(date)</p>
+                        <p class="q-ma-md">将日期转换为 ISO 8601 格式字符串 "YYYYMMDD"（如 "20020131"）。基于 boost::gregorian::to_iso_string()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_to_iso_string(2002, 1, 31) → "20020131"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_to_iso_extended_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_date_to_iso_extended_string(date)</p>
+                        <p class="q-ma-md">将日期转换为 ISO 8601 扩展格式字符串 "YYYY-MM-DD"（如 "2002-01-31"）。基于 boost::gregorian::to_iso_extended_string()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_to_iso_extended_string(2002, 1, 31) → "2002-01-31"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_eq</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_eq(date1, date2)</p>
+                        <p class="q-ma-md">比较两个日期是否相等，返回逻辑值。每个日期参数支持结构体、字符串、三个独立数值参数。基于 boost::gregorian::date::operator==。</p>
+                        <p class="q-ma-md">示例：>> boost_date_eq(2002, 1, 10, 2002, 1, 10) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_eq(2002, 1, 10, 2002, 1, 11) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_ne</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_ne(date1, date2)</p>
+                        <p class="q-ma-md">比较两个日期是否不相等，返回逻辑值。基于 boost::gregorian::date::operator!=。</p>
+                        <p class="q-ma-md">示例：>> boost_date_ne(2002, 1, 10, 2002, 1, 11) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_ne(2002, 1, 10, 2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_gt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_gt(date1, date2)</p>
+                        <p class="q-ma-md">比较 date1 是否大于 date2，返回逻辑值。基于 boost::gregorian::date::operator>。</p>
+                        <p class="q-ma-md">示例：>> boost_date_gt(2002, 1, 11, 2002, 1, 10) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_gt(2002, 1, 10, 2002, 1, 11) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_lt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_lt(date1, date2)</p>
+                        <p class="q-ma-md">比较 date1 是否小于 date2，返回逻辑值。基于 boost::gregorian::date::operator&lt;。</p>
+                        <p class="q-ma-md">示例：>> boost_date_lt(2002, 1, 10, 2002, 1, 11) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_lt(2002, 1, 11, 2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_ge</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_ge(date1, date2)</p>
+                        <p class="q-ma-md">比较 date1 是否大于等于 date2，返回逻辑值。基于 boost::gregorian::date::operator>=。</p>
+                        <p class="q-ma-md">示例：>> boost_date_ge(2002, 1, 11, 2002, 1, 10) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_ge(2002, 1, 10, 2002, 1, 10) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_ge(2002, 1, 9, 2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_le</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_le(date1, date2)</p>
+                        <p class="q-ma-md">比较 date1 是否小于等于 date2，返回逻辑值。基于 boost::gregorian::date::operator&lt;=。</p>
+                        <p class="q-ma-md">示例：>> boost_date_le(2002, 1, 10, 2002, 1, 11) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_le(2002, 1, 10, 2002, 1, 10) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_le(2002, 1, 11, 2002, 1, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_add_days</div>
+                        <p class="q-ma-md">Loadable Function: date_out = boost_date_add_days(date, days)</p>
+                        <p class="q-ma-md">给日期加上指定的天数，返回新的日期结构体（包含 .year、.month、.day 字段）。基于 boost::gregorian::date + date_duration。</p>
+                        <p class="q-ma-md">示例：>> boost_date_add_days(2002, 1, 1, 10) → struct with year=2002, month=1, day=11</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_minus_days</div>
+                        <p class="q-ma-md">Loadable Function: date_out = boost_date_minus_days(date, days)</p>
+                        <p class="q-ma-md">给日期减去指定的天数，返回新的日期结构体（包含 .year、.month、.day 字段）。基于 boost::gregorian::date - date_duration。</p>
+                        <p class="q-ma-md">示例：>> boost_date_minus_days(2002, 1, 10, 5) → struct with year=2002, month=1, day=5</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_minus_date</div>
+                        <p class="q-ma-md">Loadable Function: days = boost_date_minus_date(date1, date2)</p>
+                        <p class="q-ma-md">计算两个日期之差（date1 - date2），返回相差的天数。结果可正可负。基于 boost::gregorian::date - date。</p>
+                        <p class="q-ma-md">示例：>> boost_date_minus_date(2002, 1, 11, 2002, 1, 10) → 1</p>
+                        <p class="q-ma-md">示例：>> boost_date_minus_date(2002, 1, 10, 2002, 1, 11) → -1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_to_tm</div>
+                        <p class="q-ma-md">Loadable Function: tm_struct = boost_date_to_tm(date)</p>
+                        <p class="q-ma-md">将日期转换为 tm 结构体，包含 tm_year（1900 起年数）、tm_mon（0-11）、tm_mday（1-31）、tm_wday（0=星期天）、tm_yday（0-365）、tm_hour（0）、tm_min（0）、tm_sec（0）、tm_isdst（-1）。基于 boost::gregorian::to_tm()。</p>
+                        <p class="q-ma-md">示例：>> tm = boost_date_to_tm(2005, 1, 1) → tm.tm_year=105, tm.tm_mon=0, tm.tm_mday=1, tm.tm_wday=6, tm.tm_yday=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_from_tm</div>
+                        <p class="q-ma-md">Loadable Function: date = boost_date_from_tm(tm_struct)</p>
+                        <p class="q-ma-md">将 tm 结构体（需包含 tm_year、tm_mon、tm_mday 字段）转换为日期结构体（包含 .year、.month、.day 字段）。基于 boost::gregorian::date_from_tm()。</p>
+                        <p class="q-ma-md">示例：>> d = boost_date_from_tm(struct('tm_year',105,'tm_mon',0,'tm_mday',1)) → struct with year=2005, month=1, day=1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_shift</div>
+                        <p class="q-ma-md">Loadable Function: period_out = boost_date_period_shift(period, days)</p>
+                        <p class="q-ma-md">将 date_period 的 begin 和 end 同时加上指定的天数，返回新的 period 结构体。period 参数支持结构体（含 begin/end 或 begin/length）、两个日期、或一个日期加天数。基于 boost::gregorian::date_period::shift()。</p>
+                        <p class="q-ma-md">示例：>> dp = boost_date_period_shift(2005, 1, 1, 3, 3) → period: 2005-Jan-04 到 2005-Jan-07</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_expand</div>
+                        <p class="q-ma-md">Loadable Function: period_out = boost_date_period_expand(period, days)</p>
+                        <p class="q-ma-md">从 begin 减去天数并给 end 加上天数，扩展 date_period。基于 boost::gregorian::date_period::expand()。</p>
+                        <p class="q-ma-md">示例：>> dp = boost_date_period_expand(2005, 1, 2, 2, 1) → period: 2005-Jan-01 到 2005-Jan-04</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_begin</div>
+                        <p class="q-ma-md">Loadable Function: date = boost_date_period_begin(period)</p>
+                        <p class="q-ma-md">返回 date_period 的第一天（begin）。基于 boost::gregorian::date_period::begin()。</p>
+                        <p class="q-ma-md">示例：>> d = boost_date_period_begin(2002, 1, 1, 2002, 1, 10) → struct with year=2002, month=1, day=1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_last</div>
+                        <p class="q-ma-md">Loadable Function: date = boost_date_period_last(period)</p>
+                        <p class="q-ma-md">返回 date_period 的最后一天（last）。基于 boost::gregorian::date_period::last()。</p>
+                        <p class="q-ma-md">示例：>> d = boost_date_period_last(2002, 1, 1, 2002, 1, 10) → struct with year=2002, month=1, day=9</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_end</div>
+                        <p class="q-ma-md">Loadable Function: date = boost_date_period_end(period)</p>
+                        <p class="q-ma-md">返回 date_period 的结束边界（end），即最后一天的下一天。基于 boost::gregorian::date_period::end()。</p>
+                        <p class="q-ma-md">示例：>> d = boost_date_period_end(2002, 1, 1, 2002, 1, 10) → struct with year=2002, month=1, day=10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_length</div>
+                        <p class="q-ma-md">Loadable Function: len = boost_date_period_length(period)</p>
+                        <p class="q-ma-md">返回 date_period 的长度（天数）。基于 boost::gregorian::date_period::length()。</p>
+                        <p class="q-ma-md">示例：>> len = boost_date_period_length(2002, 1, 1, 2) → 2</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_is_null</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_is_null(period)</p>
+                        <p class="q-ma-md">检查 date_period 是否无效（end <= begin），返回逻辑值。基于 boost::gregorian::date_period::is_null()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_is_null(2002, 1, 10, 2002, 1, 1) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_contains_date</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_contains_date(period, date)</p>
+                        <p class="q-ma-md">检查 date 是否在 date_period 内，返回逻辑值。零长度 period 不能包含任何点。基于 boost::gregorian::date_period::contains()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_contains_date(2002, 1, 1, 2002, 1, 10, 2002, 1, 2) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_contains_date_period</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_contains_date_period(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 date_period 是否有交集（重叠），返回逻辑值。基于 boost::gregorian::date_period::intersects()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_contains_date_period(2002, 1, 1, 2002, 1, 10, 2002, 1, 2, 2002, 1, 3) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_intersection</div>
+                        <p class="q-ma-md">Loadable Function: period_out = boost_date_period_intersection(period1, period2)</p>
+                        <p class="q-ma-md">计算两个 date_period 的交集，如果无交集则返回 null period。基于 boost::gregorian::date_period::intersection()。</p>
+                        <p class="q-ma-md">示例：>> dp = boost_date_period_intersection(2002, 1, 1, 2002, 1, 10, 2002, 1, 2, 2002, 1, 3) → period: 2002-Jan-02 到 2002-Jan-03</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_is_adjacent</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_is_adjacent(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 date_period 是否相邻（紧挨着但不重叠），返回逻辑值。基于 boost::gregorian::date_period::is_adjacent()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_is_adjacent(2002, 1, 1, 2002, 1, 3, 2002, 1, 3, 2002, 1, 10) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_is_after</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_is_after(period, date)</p>
+                        <p class="q-ma-md">检查 date_period 是否在给定日期之后，返回逻辑值。基于 boost::gregorian::date_period::is_after()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_is_after(2002, 1, 10, 2002, 1, 30, 2002, 1, 3) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_is_before</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_is_before(period, date)</p>
+                        <p class="q-ma-md">检查 date_period 是否在给定日期之前，返回逻辑值。基于 boost::gregorian::date_period::is_before()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_is_before(2002, 1, 1, 2002, 1, 3, 2002, 1, 10) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_merge</div>
+                        <p class="q-ma-md">Loadable Function: period_out = boost_date_period_merge(period1, period2)</p>
+                        <p class="q-ma-md">返回两个 date_period 的并集。如果两个 period 没有交集，则返回 null period。基于 boost::gregorian::date_period::merge()。</p>
+                        <p class="q-ma-md">示例：>> dp = boost_date_period_merge(2002, 1, 1, 2002, 1, 10, 2002, 1, 9, 2002, 1, 31) → period: 2002-Jan-01 到 2002-Jan-31</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_span</div>
+                        <p class="q-ma-md">Loadable Function: period_out = boost_date_period_span(period1, period2)</p>
+                        <p class="q-ma-md">合并两个 date_period 及它们之间的间隔，使得 begin = min(p1.begin, p2.begin)，end = max(p1.end, p2.end)。基于 boost::gregorian::date_period::span()。</p>
+                        <p class="q-ma-md">示例：>> dp = boost_date_period_span(2002, 1, 1, 2002, 1, 5, 2002, 1, 9, 2002, 1, 31) → period: 2002-Jan-01 到 2002-Jan-31</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_span_to_simple_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_date_span_to_simple_string(period)</p>
+                        <p class="q-ma-md">将 date_period 转换为 "[YYYY-mmm-DD/YYYY-mmm-DD]" 格式字符串，mmm 为三位月份缩写。基于 boost::gregorian::to_simple_string(date_period)。</p>
+                        <p class="q-ma-md">示例：>> str = boost_date_span_to_simple_string(2002, 1, 1, 2002, 1, 31) → "[2002-Jan-01/2002-Jan-31]"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_eq</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_eq(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 date_period 是否相等，返回逻辑值。基于 boost::gregorian::date_period::operator==()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_eq(2002, 1, 1, 2002, 1, 10, 2002, 1, 1, 2002, 1, 10) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_ne</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_ne(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 date_period 是否不相等，返回逻辑值。基于 boost::gregorian::date_period::operator!=()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_ne(2002, 1, 1, 2002, 1, 10, 2002, 1, 1, 2002, 1, 11) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_gt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_gt(period1, period2)</p>
+                        <p class="q-ma-md">检查 period1 是否大于 period2，返回逻辑值。基于 boost::gregorian::date_period::operator>()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_gt(2002, 1, 10, 2002, 1, 30, 2002, 1, 1, 2002, 1, 10) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_period_lt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_period_lt(period1, period2)</p>
+                        <p class="q-ma-md">检查 period1 是否小于 period2，返回逻辑值。基于 boost::gregorian::date_period::operator<()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_date_period_lt(2002, 1, 1, 2002, 1, 10, 2002, 1, 10, 2002, 1, 30) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_gregorian_day_number</div>
+                        <p class="q-ma-md">Loadable Function: num = boost_date_gregorian_day_number(date)</p>
+                        <p class="q-ma-md">将日期转换为公历的序列日编号（serial day number）。库的历元(1400-01-01)的日编号为2232400。基于 boost::gregorian::gregorian_calendar::day_number()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_gregorian_day_number(2002, 1, 10) → 731228</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_gregorian_end_of_month_day</div>
+                        <p class="q-ma-md">Loadable Function: day = boost_date_gregorian_end_of_month_day(year, month)</p>
+                        <p class="q-ma-md">返回指定年月的最后一天的日期值（1-31）。这是一个日历级别的函数，无需创建日期对象。基于 boost::gregorian::gregorian_calendar::end_of_month_day()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_gregorian_end_of_month_day(2000, 2) → 29</p>
+                        <p class="q-ma-md">示例：>> boost_date_gregorian_end_of_month_day(2001, 2) → 28</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_gregorian_from_day_number</div>
+                        <p class="q-ma-md">Loadable Function: date = boost_date_gregorian_from_day_number(day_number)</p>
+                        <p class="q-ma-md">将序列日编号转换回日期结构体（包含 .year、.month、.day 字段）。基于 boost::gregorian::date 构造器。与 boost_date_gregorian_day_number 互为逆运算。如果 day_number 对应年份超出公历有效范围（1400-9999）或为非有限值（NaN/Inf），将返回 Octave 错误信息而不会崩溃（修复 segfault 问题）。</p>
+                        <p class="q-ma-md">示例：>> d = boost_date_gregorian_from_day_number(731228) → d.year=2002, d.month=1, d.day=10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_date_gregorian_is_leap_year</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_date_gregorian_is_leap_year(year)</p>
+                        <p class="q-ma-md">检查指定年份是否为公历闰年，返回逻辑值。基于 boost::gregorian::gregorian_calendar::is_leap_year()。</p>
+                        <p class="q-ma-md">示例：>> boost_date_gregorian_is_leap_year(2000) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_date_gregorian_is_leap_year(2001) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_date</div>
+                        <p class="q-ma-md">Loadable Function: date = boost_ptime_date(ptime)</p>
+                        <p class="q-ma-md">从 ptime（日期-时间）值中提取日期部分，返回结构体（包含 .year、.month、.day 字段）。ptime参数支持结构体（含 date 子结构体）或 "YYYY-MM-DD HH:MM:SS" 格式字符串。基于 boost::posix_time::ptime::date()。</p>
+                        <p class="q-ma-md">示例：>> d = boost_ptime_date("2002-01-10 01:00:00") → d.year=2002, d.month=1, d.day=10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_time_of_day</div>
+                        <p class="q-ma-md">Loadable Function: tod = boost_ptime_time_of_day(ptime)</p>
+                        <p class="q-ma-md">从 ptime（日期-时间）值中提取时间部分，返回结构体（包含 .hours、.minutes、.seconds、.fractional_seconds、.total_seconds 字段）。基于 boost::posix_time::ptime::time_of_day()。</p>
+                        <p class="q-ma-md">示例：>> tod = boost_ptime_time_of_day("2002-01-10 01:02:03") → tod.hours=1, tod.minutes=2, tod.seconds=3</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_is_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_is_infinity(ptime)</p>
+                        <p class="q-ma-md">检查 ptime 值是否为正无穷或负无穷，返回逻辑值。基于 boost::posix_time::ptime::is_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_infinity("pos_infin") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_infinity("2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_is_neg_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_is_neg_infinity(ptime)</p>
+                        <p class="q-ma-md">检查 ptime 值是否为负无穷，返回逻辑值。基于 boost::posix_time::ptime::is_neg_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_neg_infinity("neg_infin") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_neg_infinity("pos_infin") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_is_pos_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_is_pos_infinity(ptime)</p>
+                        <p class="q-ma-md">检查 ptime 值是否为正无穷，返回逻辑值。基于 boost::posix_time::ptime::is_pos_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_pos_infinity("pos_infin") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_pos_infinity("neg_infin") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_is_not_a_date_time</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_is_not_a_date_time(ptime)</p>
+                        <p class="q-ma-md">检查 ptime 值是否为无效日期时间（not-a-date-time），返回逻辑值。基于 boost::posix_time::ptime::is_not_a_date_time()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_not_a_date_time("not_a_date_time") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_not_a_date_time("2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_is_special</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_is_special(ptime)</p>
+                        <p class="q-ma-md">检查 ptime 值是否为任何特殊值（pos_infin、neg_infin 或 not_a_date_time），返回逻辑值。基于 boost::posix_time::ptime::is_special()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_special("pos_infin") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_special("not_a_date_time") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_is_special("2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_to_simple_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_ptime_to_simple_string(ptime)</p>
+                        <p class="q-ma-md">将 ptime 转换为 "YYYY-mmm-DD HH:MM:SS.fffffffff" 格式字符串，mmm 为三位月份缩写，小数秒仅在非零时包含。基于 boost::posix_time::to_simple_string()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_to_simple_string("2002-01-01 10:00:01") → "2002-Jan-01 10:00:01"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_to_iso_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_ptime_to_iso_string(ptime)</p>
+                        <p class="q-ma-md">将 ptime 转换为 ISO 8601 格式字符串 "YYYYMMDDTHHMMSS.fffffffff"，T 为日期-时间分隔符，小数秒仅在非零时包含。基于 boost::posix_time::to_iso_string()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_to_iso_string("2002-01-31 10:00:01") → "20020131T100001"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_to_iso_extended_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_ptime_to_iso_extended_string(ptime)</p>
+                        <p class="q-ma-md">将 ptime 转换为 ISO 8601 扩展格式字符串 "YYYY-MM-DDTHH:MM:SS.fffffffff"，T 为日期-时间分隔符，小数秒仅在非零时包含。基于 boost::posix_time::to_iso_extended_string()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_to_iso_extended_string("2002-01-31 10:00:01") → "2002-01-31T10:00:01"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_eq</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_eq(ptime1, ptime2)</p>
+                        <p class="q-ma-md">比较两个 ptime 值是否相等，返回逻辑值。每个 ptime 参数支持结构体（含 date 子结构体）或 "YYYY-MM-DD HH:MM:SS" 格式字符串。基于 boost::posix_time::ptime::operator==()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_eq("2002-01-10 01:00:00", "2002-01-10 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_eq("2002-01-10 01:00:00", "2002-01-11 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_ne</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_ne(ptime1, ptime2)</p>
+                        <p class="q-ma-md">比较两个 ptime 值是否不相等，返回逻辑值。基于 boost::posix_time::ptime::operator!=()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_ne("2002-01-10 01:00:00", "2002-01-11 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_ne("2002-01-10 01:00:00", "2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_gt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_gt(ptime1, ptime2)</p>
+                        <p class="q-ma-md">比较 ptime1 是否大于 ptime2，返回逻辑值。基于 boost::posix_time::ptime::operator>()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_gt("2002-01-11 01:00:00", "2002-01-10 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_gt("2002-01-10 01:00:00", "2002-01-11 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_lt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_lt(ptime1, ptime2)</p>
+                        <p class="q-ma-md">比较 ptime1 是否小于 ptime2，返回逻辑值。基于 boost::posix_time::ptime::operator<()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_lt("2002-01-10 01:00:00", "2002-01-11 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_lt("2002-01-11 01:00:00", "2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_ge</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_ge(ptime1, ptime2)</p>
+                        <p class="q-ma-md">比较 ptime1 是否大于等于 ptime2，返回逻辑值。基于 boost::posix_time::ptime::operator>=()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_ge("2002-01-11 01:00:00", "2002-01-10 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_ge("2002-01-10 01:00:00", "2002-01-10 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_ge("2002-01-09 01:00:00", "2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_le</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_ptime_le(ptime1, ptime2)</p>
+                        <p class="q-ma-md">比较 ptime1 是否小于等于 ptime2，返回逻辑值。基于 boost::posix_time::ptime::operator<=()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_le("2002-01-10 01:00:00", "2002-01-11 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_le("2002-01-10 01:00:00", "2002-01-10 01:00:00") → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_le("2002-01-11 01:00:00", "2002-01-10 01:00:00") → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_add_days</div>
+                        <p class="q-ma-md">Loadable Function: ptime_out = boost_ptime_add_days(ptime, days)</p>
+                        <p class="q-ma-md">给 ptime 加上指定的天数，返回新的 ptime 结构体（包含 .date 和 .time_of_day 字段）。ptime 参数支持结构体、字符串或特殊值。基于 boost::posix_time::ptime + boost::gregorian::days。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_add_days("2002-01-01 00:05:00", 1) → date=2002-01-02, time=00:05</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_minus_days</div>
+                        <p class="q-ma-md">Loadable Function: ptime_out = boost_ptime_minus_days(ptime, days)</p>
+                        <p class="q-ma-md">给 ptime 减去指定的天数，返回新的 ptime 结构体（包含 .date 和 .time_of_day 字段）。基于 boost::posix_time::ptime - boost::gregorian::days。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_minus_days("2002-01-10 00:05:00", 1) → date=2002-01-09, time=00:05</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_add_time_duration</div>
+                        <p class="q-ma-md">Loadable Function: ptime_out = boost_ptime_add_time_duration(ptime, hours, minutes, seconds, [fractional_seconds])</p>
+                        <p class="q-ma-md">给 ptime 加上指定时间长度（时、分、秒和可选的小数秒），返回新的 ptime 结构体。基于 boost::posix_time::ptime + boost::posix_time::time_duration。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_add_time_duration("2002-01-01 00:05:00", 1, 2, 0) → date=2002-01-01, time=01:07:00</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_minus_time_duration</div>
+                        <p class="q-ma-md">Loadable Function: ptime_out = boost_ptime_minus_time_duration(ptime, hours, minutes, seconds, [fractional_seconds])</p>
+                        <p class="q-ma-md">从 ptime 减去指定时间长度（时、分、秒和可选的小数秒），返回新的 ptime 结构体。基于 boost::posix_time::ptime - boost::posix_time::time_duration。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_minus_time_duration("2002-01-01 00:05:00", 0, 2, 0) → date=2002-01-01, time=00:03:00</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_minus_ptime</div>
+                        <p class="q-ma-md">Loadable Function: tod_struct = boost_ptime_minus_ptime(ptime1, ptime2)</p>
+                        <p class="q-ma-md">计算两个 ptime 的差（ptime1 - ptime2），返回 time_duration 结构体（含 .hours、.minutes、.seconds、.fractional_seconds、.total_seconds 字段）。结果可负。基于 boost::posix_time::ptime - boost::posix_time::ptime。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_minus_ptime("2002-01-01 00:00:05", "2002-01-01 00:05:00") → hours=-1, minutes=-4, seconds=-55</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_to_tm</div>
+                        <p class="q-ma-md">Loadable Function: tm_struct = boost_ptime_to_tm(ptime)</p>
+                        <p class="q-ma-md">将 ptime 转换为 tm 结构体，包含 tm_year（1900 起年数）、tm_mon（0-11）、tm_mday、tm_wday、tm_yday、tm_hour、tm_min、tm_sec 和 tm_isdst 字段。基于 boost::posix_time::to_tm()。</p>
+                        <p class="q-ma-md">示例：>> tm = boost_ptime_to_tm("2005-01-01 01:02:03") → tm.tm_year=105, tm.tm_mon=0, tm.tm_mday=1, tm.tm_wday=6, tm.tm_hour=1, tm.tm_min=2, tm.tm_sec=3, tm.tm_isdst=-1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_from_tm</div>
+                        <p class="q-ma-md">Loadable Function: ptime = boost_ptime_from_tm(tm_struct)</p>
+                        <p class="q-ma-md">将 tm 结构体（需包含 tm_year、tm_mon、tm_mday、可选 tm_hour、tm_min、tm_sec）转换为 ptime 结构体。基于 boost::posix_time::ptime_from_tm()。</p>
+                        <p class="q-ma-md">示例：>> pt = boost_ptime_from_tm(struct('tm_year',105,'tm_mon',0,'tm_mday',1,'tm_hour',1,'tm_min',2,'tm_sec',3)) → date=2005-01-01, time=01:02:03</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_to_tm</div>
+                        <p class="q-ma-md">Loadable Function: tm_struct = boost_time_duration_to_tm(hours, minutes, seconds)</p>
+                        <p class="q-ma-md">将 time_duration（时、分、秒）转换为 tm 结构体，日期相关字段设为 0。基于 boost::posix_time::to_tm(time_duration)。</p>
+                        <p class="q-ma-md">示例：>> tm = boost_time_duration_to_tm(1, 2, 3) → tm.tm_hour=1, tm.tm_min=2, tm.tm_sec=3, 其他字段=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_hours</div>
+                        <p class="q-ma-md">Loadable Function: hours = boost_time_duration_hours(td)</p>
+                        <p class="q-ma-md">从 time_duration 中提取标准化小时数。输入 td 支持结构体（含 hours、minutes、seconds、fractional_seconds 字段）、字符串 "HH:MM:SS.fff"、或 3-4 个数值参数。基于 boost::posix_time::time_duration::hours()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_hours(1, 2, 3) → 1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_minutes</div>
+                        <p class="q-ma-md">Loadable Function: minutes = boost_time_duration_minutes(td)</p>
+                        <p class="q-ma-md">从 time_duration 中提取标准化分钟数（0-59）。基于 boost::posix_time::time_duration::minutes()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_minutes(1, 2, 3) → 2</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_seconds</div>
+                        <p class="q-ma-md">Loadable Function: seconds = boost_time_duration_seconds(td)</p>
+                        <p class="q-ma-md">从 time_duration 中提取标准化秒数（0-59）。基于 boost::posix_time::time_duration::seconds()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_seconds(1, 2, 3) → 3</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_total_seconds</div>
+                        <p class="q-ma-md">Loadable Function: total_seconds = boost_time_duration_total_seconds(td)</p>
+                        <p class="q-ma-md">从 time_duration 中获取总秒数（截断小数部分）。基于 boost::posix_time::time_duration::total_seconds()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_total_seconds(1, 2, 3, 10) → 3723</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_total_milliseconds</div>
+                        <p class="q-ma-md">Loadable Function: total_ms = boost_time_duration_total_milliseconds(td)</p>
+                        <p class="q-ma-md">从 time_duration 中获取总毫秒数（截断剩余位数）。基于 boost::posix_time::time_duration::total_milliseconds()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_total_milliseconds(1, 2, 3, 123456789) → 3723123</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_total_microseconds</div>
+                        <p class="q-ma-md">Loadable Function: total_us = boost_time_duration_total_microseconds(td)</p>
+                        <p class="q-ma-md">从 time_duration 中获取总微秒数（截断剩余位数）。基于 boost::posix_time::time_duration::total_microseconds()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_total_microseconds(1, 2, 3, 123456789) → 3723123456</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_total_nanoseconds</div>
+                        <p class="q-ma-md">Loadable Function: total_ns = boost_time_duration_total_nanoseconds(td)</p>
+                        <p class="q-ma-md">从 time_duration 中获取总纳秒数（截断剩余位数）。基于 boost::posix_time::time_duration::total_nanoseconds()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_total_nanoseconds(1, 2, 3, 123456789) → 3723123456789</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_fractional_seconds</div>
+                        <p class="q-ma-md">Loadable Function: fractional_seconds = boost_time_duration_fractional_seconds(td)</p>
+                        <p class="q-ma-md">从 time_duration 中获取小数秒数。基于 boost::posix_time::time_duration::fractional_seconds()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_fractional_seconds(1, 2, 3, 1000) → 1000</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_negative</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_negative(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为负数，返回逻辑值。基于 boost::posix_time::time_duration::is_negative()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_negative(-1, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_negative(1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_zero</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_zero(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为零，返回逻辑值。基于 boost::posix_time::time_duration::is_zero()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_zero(0, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_zero(1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_positive</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_positive(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为正数，返回逻辑值。基于 boost::posix_time::time_duration::is_positive()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_positive(1, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_positive(-1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_invert_sign</div>
+                        <p class="q-ma-md">Loadable Function: td_out = boost_time_duration_invert_sign(td)</p>
+                        <p class="q-ma-md">生成符号取反后的新 time_duration，返回结构体（含 hours、minutes、seconds、fractional_seconds 字段）。基于 boost::posix_time::time_duration::invert_sign()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_invert_sign(-1, 0, 0) → struct with hours=1, minutes=0, seconds=0, fractional_seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_abs</div>
+                        <p class="q-ma-md">Loadable Function: td_out = boost_time_duration_abs(td)</p>
+                        <p class="q-ma-md">生成 time_duration 的绝对值，返回结构体（含 hours、minutes、seconds、fractional_seconds 字段）。基于 boost::posix_time::time_duration::abs()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_abs(-1, 0, 0) → struct with hours=1, minutes=0, seconds=0, fractional_seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_resolution</div>
+                        <p class="q-ma-md">Loadable Function: resolution = boost_time_duration_resolution()</p>
+                        <p class="q-ma-md">返回 time_duration 的分辨率能力，值为字符串如 "nano"、"micro"、"milli" 等。静态方法。基于 boost::posix_time::time_duration::resolution()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_resolution() → "nano"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_num_fractional_digits</div>
+                        <p class="q-ma-md">Loadable Function: num_digits = boost_time_duration_num_fractional_digits()</p>
+                        <p class="q-ma-md">返回时间分辨率的小数位数，如 nano 时返回 9，micro 时返回 6。静态方法。基于 boost::posix_time::time_duration::num_fractional_digits()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_num_fractional_digits() → 9</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_ticks_per_second</div>
+                        <p class="q-ma-md">Loadable Function: ticks = boost_time_duration_ticks_per_second()</p>
+                        <p class="q-ma-md">返回每秒的 tick 数。例如 nanosecond 分辨率返回 1,000,000,000。静态方法。基于 boost::posix_time::time_duration::ticks_per_second()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ticks_per_second() → 1000000000</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_ticks</div>
+                        <p class="q-ma-md">Loadable Function: ticks = boost_time_duration_ticks(td)</p>
+                        <p class="q-ma-md">返回 time_duration 的原始 tick 计数。注意：在特殊值上调用会得到不可预测的结果。基于 boost::posix_time::time_duration::ticks()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ticks(0, 0, 0, 1000) → 1000</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_unit</div>
+                        <p class="q-ma-md">Loadable Function: td_unit = boost_time_duration_unit()</p>
+                        <p class="q-ma-md">返回最小可能的持续时间单位（通常为 1 纳秒的 time_duration）。静态方法。返回结构体。基于 boost::posix_time::time_duration::unit()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_unit() → struct with hours=0, minutes=0, seconds=0, fractional_seconds=1</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_neg_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_neg_infinity(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为负无穷大，返回逻辑值。基于 boost::posix_time::time_duration::is_neg_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_neg_infinity('neg_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_neg_infinity(1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_pos_infinity</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_pos_infinity(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为正无穷大，返回逻辑值。基于 boost::posix_time::time_duration::is_pos_infinity()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_pos_infinity('pos_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_pos_infinity(1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_not_a_date_time</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_not_a_date_time(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为 not-a-date-time（无效时间），返回逻辑值。基于 boost::posix_time::time_duration::is_not_a_date_time()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_not_a_date_time('not_a_date_time') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_not_a_date_time(1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_is_special</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_is_special(td)</p>
+                        <p class="q-ma-md">判断 time_duration 是否为任意特殊值（pos_infin、neg_infin 或 not_a_date_time），返回逻辑值。基于 boost::posix_time::time_duration::is_special()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_special('pos_infin') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_special('not_a_date_time') → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_is_special(2, 5, 10) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_to_simple_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_time_duration_to_simple_string(td)</p>
+                        <p class="q-ma-md">将 time_duration 转换为 "HH:MM:SS.fffffffff" 格式的字符串，小数秒仅在非零时包含。基于 boost::posix_time::to_simple_string(time_duration)。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_to_simple_string(10, 0, 1, 123456789) → "10:00:01.123456789"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_to_iso_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_time_duration_to_iso_string(td)</p>
+                        <p class="q-ma-md">将 time_duration 转换为 ISO 8601 格式 "HHMMSS.fffffffff" 的字符串，小数秒仅在非零时包含。基于 boost::posix_time::to_iso_string(time_duration)。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_to_iso_string(10, 0, 1, 123456789) → "100001.123456789"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_eq</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_eq(td1, td2)</p>
+                        <p class="q-ma-md">比较两个 time_duration 是否相等，返回逻辑值。每个参数支持结构体、字符串、或 3-4 个数值参数。基于 boost::posix_time::time_duration::operator==。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_eq(1, 2, 3, 1, 2, 3) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_eq(1, 2, 3, 4, 5, 6) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_ne</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_ne(td1, td2)</p>
+                        <p class="q-ma-md">比较两个 time_duration 是否不等，返回逻辑值。基于 boost::posix_time::time_duration::operator!=。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ne(1, 2, 3, 4, 5, 6) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ne(1, 2, 3, 1, 2, 3) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_gt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_gt(td1, td2)</p>
+                        <p class="q-ma-md">比较 td1 是否大于 td2，返回逻辑值。基于 boost::posix_time::time_duration::operator>。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_gt(5, 0, 0, 1, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_gt(1, 0, 0, 5, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_lt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_lt(td1, td2)</p>
+                        <p class="q-ma-md">比较 td1 是否小于 td2，返回逻辑值。基于 boost::posix_time::time_duration::operator<。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_lt(1, 0, 0, 5, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_lt(5, 0, 0, 1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_ge</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_ge(td1, td2)</p>
+                        <p class="q-ma-md">比较 td1 是否大于等于 td2，返回逻辑值。基于 boost::posix_time::time_duration::operator>=。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ge(5, 0, 0, 1, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ge(1, 0, 0, 1, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_ge(1, 0, 0, 5, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_le</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_duration_le(td1, td2)</p>
+                        <p class="q-ma-md">比较 td1 是否小于等于 td2，返回逻辑值。基于 boost::posix_time::time_duration::operator<=。</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_le(1, 0, 0, 5, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_le(1, 0, 0, 1, 0, 0) → 1 (true)</p>
+                        <p class="q-ma-md">示例：>> boost_time_duration_le(5, 0, 0, 1, 0, 0) → 0 (false)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_plus_time_duration</div>
+                        <p class="q-ma-md">Loadable Function: td = boost_time_duration_plus_time_duration(td1, td2)</p>
+                        <p class="q-ma-md">将两个 time_duration 相加，返回新的 time_duration 结构体。每个 time_duration 参数支持结构体（含 hours、minutes、seconds、fractional_seconds 字段）、字符串 "HH:MM:SS.fff"、或 3-4 个数值参数。基于 boost::posix_time::time_duration::operator+。</p>
+                        <p class="q-ma-md">示例：>> td = boost_time_duration_plus_time_duration(1, 2, 30, 0, 10, 30) → td.hours=1, td.minutes=13, td.seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_minus_time_duration</div>
+                        <p class="q-ma-md">Loadable Function: td = boost_time_duration_minus_time_duration(td1, td2)</p>
+                        <p class="q-ma-md">将 time_duration td2 从 td1 中减去，返回新的 time_duration 结构体。基于 boost::posix_time::time_duration::operator-。</p>
+                        <p class="q-ma-md">示例：>> td = boost_time_duration_minus_time_duration(2, 30, 0, 1, 45, 0) → td.hours=0, td.minutes=45, td.seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_divide_by_days</div>
+                        <p class="q-ma-md">Loadable Function: td = boost_time_duration_divide_by_days(td, divisor)</p>
+                        <p class="q-ma-md">将 time_duration 除以一个整数除数，返回新的 time_duration 结构体。基于 boost::posix_time::time_duration::operator/。</p>
+                        <p class="q-ma-md">示例：>> td = boost_time_duration_divide_by_days(3, 0, 0, 2) → td.hours=1, td.minutes=30, td.seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_duration_multiply_by_days</div>
+                        <p class="q-ma-md">Loadable Function: td = boost_time_duration_multiply_by_days(td, multiplier)</p>
+                        <p class="q-ma-md">将 time_duration 乘以一个整数乘数，返回新的 time_duration 结构体。基于 boost::posix_time::time_duration::operator*。</p>
+                        <p class="q-ma-md">示例：>> td = boost_time_duration_multiply_by_days(3, 0, 0, 2) → td.hours=6, td.minutes=0, td.seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_begin</div>
+                        <p class="q-ma-md">Loadable Function: ptime = boost_time_period_begin(period)</p>
+                        <p class="q-ma-md">返回 time_period 的开始时间。period 参数支持结构体（含 begin/end 或 begin/length）、两个 ptime、或一个 ptime 加 time_duration。返回 ptime 结构体含 date 和 time_of_day 子字段。基于 boost::posix_time::time_period::begin()。</p>
+                        <p class="q-ma-md">示例：>> pt = boost_time_period_begin(struct('begin', '2002-01-10 00:00:10', 'end', '2002-01-10 10:00:00')) → pt.date.year=2002, pt.time_of_day.hours=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_last</div>
+                        <p class="q-ma-md">Loadable Function: ptime = boost_time_period_last(period)</p>
+                        <p class="q-ma-md">返回 time_period 的最后时间。基于 boost::posix_time::time_period::last()。</p>
+                        <p class="q-ma-md">示例：>> pt = boost_time_period_last(struct('begin', '2002-01-10 00:00:10', 'end', '2002-01-10 10:00:00')) → pt.time_of_day.hours=9</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_end</div>
+                        <p class="q-ma-md">Loadable Function: ptime = boost_time_period_end(period)</p>
+                        <p class="q-ma-md">返回 time_period 的结束边界（end），即最后时间之后的一刻。基于 boost::posix_time::time_period::end()。</p>
+                        <p class="q-ma-md">示例：>> pt = boost_time_period_end(struct('begin', '2002-01-10 00:00:10', 'end', '2002-01-10 10:00:00')) → pt.time_of_day.hours=10</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_length</div>
+                        <p class="q-ma-md">Loadable Function: td = boost_time_period_length(period)</p>
+                        <p class="q-ma-md">返回 time_period 的长度，以 time_duration 结构体表示。基于 boost::posix_time::time_period::length()。</p>
+                        <p class="q-ma-md">示例：>> td = boost_time_period_length(struct('begin', '2002-01-10 00:00:00', 'length', struct('hours', 1, 'minutes', 30, 'seconds', 0))) → td.hours=1, td.minutes=30, td.seconds=0</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_is_null</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_is_null(period)</p>
+                        <p class="q-ma-md">检查 time_period 是否无效（end <= begin），返回逻辑值。基于 boost::posix_time::time_period::is_null()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_time_period_is_null('2002-01-10 12:00:00', '2002-01-10 09:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_contains_ptime</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_contains_ptime(period, ptime)</p>
+                        <p class="q-ma-md">检查 ptime 是否在 time_period 内部，返回逻辑值。零长度 period 不能包含任何点。基于 boost::posix_time::time_period::contains()。</p>
+                        <p class="q-ma-md">示例：>> tf = boost_time_period_contains_ptime('2002-01-10 00:00:10', '2002-01-10 10:00:00', '2002-01-10 02:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_contains_time_period</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_contains_time_period(period1, period2)</p>
+                        <p class="q-ma-md">检查 period2 是否完全包含在 period1 内部，返回逻辑值。基于 boost::posix_time::time_period::contains(time_period)。</p>
+                        <p class="q-ma-md">示例：>> tp1 = struct('begin','2002-01-01 01:00:00','end','2002-01-01 12:00:00'); tp2 = struct('begin','2002-01-01 02:00:00','end','2002-01-01 04:00:00'); boost_time_period_contains_time_period(tp1, tp2) → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_intersects</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_intersects(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 time_period 是否有重叠（交集非空），返回逻辑值。基于 boost::posix_time::time_period::intersects()。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_intersects('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_intersection</div>
+                        <p class="q-ma-md">Loadable Function: period = boost_time_period_intersection(period1, period2)</p>
+                        <p class="q-ma-md">计算两个 time_period 的交集，返回 time_period 结构体。若两个 period 无重叠，则返回 null period。基于 boost::posix_time::time_period::intersection()。</p>
+                        <p class="q-ma-md">示例：>> tp = boost_time_period_intersection('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00'); tp.begin.date.year → 2002, tp.begin.time_of_day.hours → 2</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_merge</div>
+                        <p class="q-ma-md">Loadable Function: period = boost_time_period_merge(period1, period2)</p>
+                        <p class="q-ma-md">合并两个 time_period（并集），返回 time_period 结构体。若两个 period 无重叠，则返回 null period。基于 boost::posix_time::time_period::merge()。</p>
+                        <p class="q-ma-md">示例：>> tp = boost_time_period_merge('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00'); tp.begin.time_of_day.hours → 1, tp.end.time_of_day.hours → 12</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_span</div>
+                        <p class="q-ma-md">Loadable Function: period = boost_time_period_span(period1, period2)</p>
+                        <p class="q-ma-md">合并两个 time_period 及其中间间隔为一个 period，begin = min(p1.begin, p2.begin)，end = max(p1.end, p2.end)。即使无重叠也可工作。基于 boost::posix_time::time_period::span()。</p>
+                        <p class="q-ma-md">示例：>> tp = boost_time_period_span('2002-01-01 01:00:00','2002-01-01 02:00:00','2002-01-01 05:00:00','2002-01-01 06:00:00'); tp.begin.time_of_day.hours → 1, tp.end.time_of_day.hours → 6</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_to_simple_string</div>
+                        <p class="q-ma-md">Loadable Function: str = boost_time_period_to_simple_string(period)</p>
+                        <p class="q-ma-md">将 time_period 转换为 "[YYYY-mmm-DD hh:mm:ss.fffffffff/YYYY-mmm-DD hh:mm:ss.fffffffff]" 格式字符串，mmm 为三位月份缩写。基于 boost::posix_time::to_simple_string(time_period)。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_to_simple_string('2002-01-01 01:25:10','2002-01-31 01:25:10.123456789') → "[2002-Jan-01 01:25:10/2002-Jan-31 01:25:10.123456789]"</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_eq</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_eq(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 time_period 是否相等（p1.begin == p2.begin && p1.last == p2.last），返回逻辑值。基于 boost::posix_time::time_period::operator==。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_eq('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 01:00:00','2002-01-01 12:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_ne</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_ne(period1, period2)</p>
+                        <p class="q-ma-md">检查两个 time_period 是否不相等，返回逻辑值。基于 boost::posix_time::time_period::operator!=。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_ne('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 12:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_gt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_gt(period1, period2)</p>
+                        <p class="q-ma-md">检查 period1 是否严格大于 period2（period1的begin > period2的end），返回逻辑值。基于 boost::posix_time::time_period::operator>。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_gt('2002-01-01 05:00:00','2002-01-01 06:00:00','2002-01-01 01:00:00','2002-01-01 02:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_lt</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_lt(period1, period2)</p>
+                        <p class="q-ma-md">检查 period1 是否严格小于 period2（period1的end < period2的begin），返回逻辑值。基于 boost::posix_time::time_period::operator<。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_lt('2002-01-01 01:00:00','2002-01-01 02:00:00','2002-01-01 05:00:00','2002-01-01 06:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_ge</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_ge(period1, period2)</p>
+                        <p class="q-ma-md">检查 period1 是否大于等于 period2（period1的end >= period2的begin），返回逻辑值。基于 boost::posix_time::time_period::operator>=。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_ge('2002-01-01 05:00:00','2002-01-01 06:00:00','2002-01-01 01:00:00','2002-01-01 02:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_time_period_le</div>
+                        <p class="q-ma-md">Loadable Function: tf = boost_time_period_le(period1, period2)</p>
+                        <p class="q-ma-md">检查 period1 是否小于等于 period2（period1的end <= period2的begin），返回逻辑值。基于 boost::posix_time::time_period::operator<=。</p>
+                        <p class="q-ma-md">示例：>> boost_time_period_le('2002-01-01 01:00:00','2002-01-01 02:00:00','2002-01-01 05:00:00','2002-01-01 06:00:00') → 1 (true)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_from_time_t</div>
+                        <p class="q-ma-md">Loadable Function: ptime = boost_ptime_from_time_t(time_t_value)</p>
+                        <p class="q-ma-md">从 time_t 值（自 1970-01-01 UTC 以来的秒数）创建 ptime。基于 boost::posix_time::from_time_t()。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_from_time_t(1118158776) → date=2005-06-07, time=15:39:36</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_ptime_from_ftime</div>
+                        <p class="q-ma-md">Loadable Function: ptime = boost_ptime_from_ftime(dwHighDateTime, dwLowDateTime)</p>
+                        <p class="q-ma-md">从 FILETIME 结构组件（高、低 32 位）创建 ptime。FILETIME 表示自 1601-01-01 UTC 以来 100 纳秒间隔数。基于 boost::posix_time::from_ftime&lt;ptime&gt;()。仅当平台支持 FILETIME 时可用。</p>
+                        <p class="q-ma-md">示例：>> boost_ptime_from_ftime(29715317, 3865122988) → date=2005-06-07, time=15:30:57</p>
+                        <q-separator></q-separator>
+
+                        <div id="common_examples" class="title1 q-ma-md text-primary">常见用例</div>
+                        <div class="text-h5 q-ma-md text-red-10">基本统计计算：</div>
+                        <p class="q-ma-md">>> data = randn (1000, 1);</p>
+                        <p class="q-ma-md">>> cnt = boost_accumulators_count (data);    % 元素个数</p>
+                        <p class="q-ma-md">>> m = boost_accumulators_max (data);       % 最大值</p>
+                        <p class="q-ma-md">>> mn = boost_accumulators_min (data);      % 最小值</p>
+                        <p class="q-ma-md">>> mu = boost_accumulators_mean_and_variants (data);  % 均值、计数、和</p>
+                        <p class="q-ma-md">>> s = boost_accumulators_sum_and_variants (data);   % 和、Kahan 补偿和</p>
+                        <div class="text-h5 q-ma-md text-red-10">高级统计计算：</div>
+                        <p class="q-ma-md">>> data2 = [2, 7, 4, 9, 3];</p>
+                        <p class="q-ma-md">>> s = boost_accumulators_skewness (data2);      % 偏度</p>
+                        <p class="q-ma-md">>> k = boost_accumulators_kurtosis (data2);      % 峰度</p>
+                        <p class="q-ma-md">>> m2 = boost_accumulators_moment (data2, 2);   % 二阶矩</p>
+                        <p class="q-ma-md">>> c = boost_accumulators_covariance ([1,2; 1,4; 2,3; 6,1]);  % 协方差</p>
+                        <div class="text-h5 q-ma-md text-red-10">分位数估计：</div>
+                        <p class="q-ma-md">>> q = boost_accumulators_p_square_quantile_and_variants (randn(1000,1), 0.5);</p>
+                        <p class="q-ma-md">>> qs = boost_accumulators_extended_p_square (randn(1000,1), [0.25, 0.5, 0.75]);</p>
+                        <p class="q-ma-md">>> r = boost_accumulators_median_and_variants (randn(1000,1));  % 中位数三种算法</p>
+                        <div class="text-h5 q-ma-md text-red-10">数据分布估计：</div>
+                        <p class="q-ma-md">>> d = boost_accumulators_density (randn(1000,1));               % 概率密度</p>
+                        <p class="q-ma-md">>> cdf = boost_accumulators_p_square_cumulative_distribution (randn(1000,1));  % 累积分布</p>
+                        <div class="text-h5 q-ma-md text-red-10">极值分析：</div>
+                        <p class="q-ma-md">>> tail = boost_accumulators_tail (randn(1000,1), 5, 'right');   % 右尾 5 个最大值</p>
+                        <p class="q-ma-md">>> r = boost_accumulators_peaks_over_threshold_and_variants (randn(1000,1), 2.0);  % POT 分析</p>
+                        <div class="text-h5 q-ma-md text-red-10">时间间隔运算：</div>
+                        <p class="q-ma-md">>> cnt = boost_chrono_duration_count (5, 'seconds');                       % 获取纳秒计数</p>
+                        <p class="q-ma-md">>> r = boost_chrono_duration_add (3, 'milliseconds', 10, 'microseconds');    % 时间相加</p>
+                        <p class="q-ma-md">>> r = boost_chrono_duration_minus (10, 'seconds', 3, 'seconds');            % 时间相减</p>
+                        <p class="q-ma-md">>> r = boost_chrono_duration_multiply (5, 'seconds', 2);                    % 时间乘以标量</p>
+                        <p class="q-ma-md">>> r = boost_chrono_duration_divide_by_times (10, 'seconds', 2);             % 时间除以标量</p>
+                        <p class="q-ma-md">>> ratio = boost_chrono_duration_divide_by_duration (10, 'seconds', 2, 'seconds');  % 时间比</p>
+                        <p class="q-ma-md">>> r = boost_chrono_duration_remainder_by_times (10, 'seconds', 3);          % 时间取余</p>
+                        <p class="q-ma-md">>> r = boost_chrono_duration_remainder_by_duration (10, 'seconds', 3, 'seconds');  % 时间取余</p>
+                        <p class="q-ma-md">>> tf = boost_chrono_duration_eq (60, 'seconds', 1, 'minutes');             % 时间相等比较</p>
+                        <p class="q-ma-md">>> tf = boost_chrono_duration_ne (61, 'seconds', 1, 'minutes');             % 时间不等比较</p>
+                        <p class="q-ma-md">>> tf = boost_chrono_duration_lt (500, 'milliseconds', 1, 'seconds');        % 时间小于比较</p>
+                        <p class="q-ma-md">>> tf = boost_chrono_duration_le (1000, 'milliseconds', 1, 'seconds');       % 时间小于等于比较</p>
+                        <p class="q-ma-md">>> tf = boost_chrono_duration_gt (2, 'minutes', 30, 'seconds');             % 时间大于比较</p>
+                        <p class="q-ma-md">>> tf = boost_chrono_duration_ge (1, 'minutes', 60, 'seconds');             % 时间大于等于比较</p>
+                        <p class="q-ma-md">>> v = boost_chrono_duration_cast (3600, 'seconds', 'hours');              % 单位转换</p>
+                        <div class="text-h5 q-ma-md text-red-10">时钟操作：</div>
+                        <p class="q-ma-md">>> t = boost_chrono_system_clock_now ();        % 系统时钟当前时间</p>
+                        <p class="q-ma-md">>> t = boost_chrono_steady_clock_now ();        % 稳态时钟当前时间</p>
+                        <p class="q-ma-md">>> t = boost_chrono_high_resolution_clock_now ();  % 高分辨率时钟当前时间</p>
+                        <p class="q-ma-md">>> t = boost_process_cpu_clock_now ();          % 进程CPU时钟时间</p>
+                        <p class="q-ma-md">>> t = boost_thread_clock_now ();               % 线程CPU时钟时间</p>
+                        <p class="q-ma-md">>> dur = boost_chrono_system_clock_duration (); % 测量挂钟耗时（按Ctrl+C退出）</p>
+                        <p class="q-ma-md">>> dur = boost_chrono_steady_clock_duration (); % 测量稳态耗时（按Ctrl+C退出）</p>
+                        <p class="q-ma-md">>> dur = boost_chrono_high_resolution_clock_duration ();  % 测量高分辨率耗时（按Ctrl+C退出）</p>
+                        <p class="q-ma-md">>> dur = boost_process_cpu_clock_duration ();    % 测量进程CPU耗时（按Ctrl+C退出）</p>
+                        <p class="q-ma-md">>> dur = boost_thread_clock_duration ();         % 测量线程CPU耗时（按Ctrl+C退出）</p>
+                        <div class="text-h5 q-ma-md text-red-10">time_duration算术运算：</div>
+                        <p class="q-ma-md">>> td = boost_time_duration_plus_time_duration(1, 2, 30, 0, 10, 30);       % time_duration相加 → td.hours=1, td.minutes=13</p>
+                        <p class="q-ma-md">>> td = boost_time_duration_minus_time_duration(2, 30, 0, 1, 45, 0);      % time_duration相减 → td.hours=0, td.minutes=45</p>
+                        <p class="q-ma-md">>> td = boost_time_duration_divide_by_days(3, 0, 0, 2);                  % time_duration除以整数 → td.hours=1, td.minutes=30</p>
+                        <p class="q-ma-md">>> td = boost_time_duration_multiply_by_days(3, 0, 0, 2);                % time_duration乘以整数 → td.hours=6</p>
+                        <div class="text-h5 q-ma-md text-red-10">time_period操作：</div>
+                        <p class="q-ma-md">>> pt = boost_time_period_begin(struct('begin','2002-01-10 00:00:10','end','2002-01-10 10:00:00'));  % period开始时间</p>
+                        <p class="q-ma-md">>> pt = boost_time_period_last(struct('begin','2002-01-10 00:00:10','end','2002-01-10 10:00:00'));   % period最后时间</p>
+                        <p class="q-ma-md">>> pt = boost_time_period_end(struct('begin','2002-01-10 00:00:10','end','2002-01-10 10:00:00'));    % period结束边界</p>
+                        <p class="q-ma-md">>> td = boost_time_period_length(struct('begin','2002-01-10 00:00:00','length',struct('hours',1,'minutes',30,'seconds',0)));  % period长度</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_is_null('2002-01-10 12:00:00','2002-01-10 09:00:00');                   % 检查period是否无效</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_contains_ptime('2002-01-10 00:00:10','2002-01-10 10:00:00','2002-01-10 02:00:00');  % 检查点是否在period内</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_contains_time_period('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00');  % 检查period2是否完全在period1内</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_intersects('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00');  % 检查period是否重叠</p>
+                        <p class="q-ma-md">>> tp = boost_time_period_intersection('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00');  % 计算period交集</p>
+                        <p class="q-ma-md">>> tp = boost_time_period_merge('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 04:00:00');  % 合并两个period</p>
+                        <p class="q-ma-md">>> tp = boost_time_period_span('2002-01-01 01:00:00','2002-01-01 02:00:00','2002-01-01 05:00:00','2002-01-01 06:00:00');  % span两个period（含间隔）</p>
+                        <p class="q-ma-md">>> str = boost_time_period_to_simple_string('2002-01-01 01:25:10','2002-01-31 01:25:10.123456789');  % period转字符串</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_eq('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 01:00:00','2002-01-01 12:00:00');  % period相等比较</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_ne('2002-01-01 01:00:00','2002-01-01 12:00:00','2002-01-01 02:00:00','2002-01-01 12:00:00');  % period不等比较</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_gt('2002-01-01 05:00:00','2002-01-01 06:00:00','2002-01-01 01:00:00','2002-01-01 02:00:00');  % period大于比较</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_lt('2002-01-01 01:00:00','2002-01-01 02:00:00','2002-01-01 05:00:00','2002-01-01 06:00:00');  % period小于比较</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_ge('2002-01-01 05:00:00','2002-01-01 06:00:00','2002-01-01 01:00:00','2002-01-01 02:00:00');  % period大于等于比较</p>
+                        <p class="q-ma-md">>> tf = boost_time_period_le('2002-01-01 01:00:00','2002-01-01 02:00:00','2002-01-01 05:00:00','2002-01-01 06:00:00');  % period小于等于比较</p>
+                        <div class="text-h5 q-ma-md text-red-10">时间格式化：</div>
+                        <p class="q-ma-md">>> str = boost_time_fmt_duration ('%H:%M:%S', 3661, 'seconds');  % 格式化持续时间</p>
+                        <p class="q-ma-md">>> str = boost_time_fmt_system_clock ('%Y-%m-%d %H:%M:%S');      % 格式化当前系统时间</p>
+                        <q-separator></q-separator>
+                        <div class="text-h5 q-ma-md text-red-10">日期操作：</div>
+                        <p class="q-ma-md">>> y = boost_date_get_year(2002, 1, 10);                            % 获取年份 → 2002</p>
+                        <p class="q-ma-md">>> m = boost_date_get_month(2002, 1, 10);                           % 获取月份 → 1</p>
+                        <p class="q-ma-md">>> d = boost_date_get_day(2002, 1, 10);                             % 获取日期 → 10</p>
+                        <p class="q-ma-md">>> ymd = boost_date_get_year_month_day(2002, 1, 10);                % 获取年月日 → ymd.year=2002, ymd.month=1, ymd.day=10</p>
+                        <p class="q-ma-md">>> dow = boost_date_get_day_of_week(2002, 1, 10);                   % 获取星期 → 4 (Thursday)</p>
+                        <p class="q-ma-md">>> doy = boost_date_get_day_of_year(2000, 1, 10);                   % 获取一年中的第几天 → 10</p>
+                        <p class="q-ma-md">>> eom = boost_date_get_end_of_month(2000, 1, 10);                  % 获取月末 → eom.year=2000, eom.month=1, eom.day=31</p>
+                        <p class="q-ma-md">>> tf = boost_date_is_infinity('pos_infin');                        % 检查无穷大 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_is_neg_infinity('neg_infin');                    % 检查负无穷 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_is_pos_infinity('pos_infin');                    % 检查正无穷 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_is_not_a_date('not_a_date_time');                % 检查无效日期 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_is_special('pos_infin');                         % 检查特殊值 → 1 (true)</p>
+                        <p class="q-ma-md">>> mjd = boost_date_modjulian_day(2002, 1, 10);                     % 获取修改的儒略日 → 52284</p>
+                        <p class="q-ma-md">>> jd = boost_date_julian_day(2002, 1, 10);                         % 获取儒略日 → 2452284</p>
+                        <p class="q-ma-md">>> wn = boost_date_week_number(2002, 1, 10);                         % 获取ISO周编号 → 2</p>
+                        <p class="q-ma-md">>> eom = boost_date_end_of_month(2000, 2, 1);                        % 获取月末 → eom.year=2000, eom.month=2, eom.day=29</p>
+                        <p class="q-ma-md">>> str = boost_date_to_simple_string(2002, 1, 1);                    % 转换为简单字符串 → "2002-Jan-01"</p>
+                        <p class="q-ma-md">>> str = boost_date_to_iso_string(2002, 1, 31);                      % 转换为ISO字符串 → "20020131"</p>
+                        <p class="q-ma-md">>> str = boost_date_to_iso_extended_string(2002, 1, 31);              % 转换为ISO扩展字符串 → "2002-01-31"</p>
+                        <p class="q-ma-md">>> tf = boost_date_eq(2002, 1, 10, 2002, 1, 10);                     % 日期相等比较 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_ne(2002, 1, 10, 2002, 1, 11);                     % 日期不等比较 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_gt(2002, 1, 11, 2002, 1, 10);                     % 日期大于比较 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_lt(2002, 1, 10, 2002, 1, 11);                     % 日期小于比较 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_ge(2002, 1, 11, 2002, 1, 10);                     % 日期大于等于比较 → 1 (true)</p>
+                        <p class="q-ma-md">>> tf = boost_date_le(2002, 1, 10, 2002, 1, 11);                     % 日期小于等于比较 → 1 (true)</p>
+                        <p class="q-ma-md">>> d = boost_date_add_days(2002, 1, 1, 10);                          % 加天数 → d.year=2002, d.month=1, d.day=11</p>
+                        <p class="q-ma-md">>> d = boost_date_minus_days(2002, 1, 10, 5);                        % 减天数 → d.year=2002, d.month=1, d.day=5</p>
+                        <p class="q-ma-md">>> days = boost_date_minus_date(2002, 1, 11, 2002, 1, 10);           % 日期差 → 1</p>
+                        <p class="q-ma-md">>> tm = boost_date_to_tm(2005, 1, 1);                                 % 转tm结构体 → tm.tm_year=105, tm.tm_mon=0, ...</p>
+                        <p class="q-ma-md">>> d = boost_date_from_tm(struct('tm_year',105,'tm_mon',0,'tm_mday',1));  % tm转日期 → d.year=2005, d.month=1, d.day=1</p>
+                        <p class="q-ma-md">>> dp = boost_date_period_shift(2005, 1, 1, 3, 3);               % 移动日期区间</p>
+                        <p class="q-ma-md">>> dp = boost_date_period_expand(2005, 1, 2, 2, 1);               % 扩展日期区间</p>
+                        <p class="q-ma-md">>> d = boost_date_period_begin(2002, 1, 1, 2002, 1, 10);            % 获取区间开始日期</p>
+                        <p class="q-ma-md">>> d = boost_date_period_last(2002, 1, 1, 2002, 1, 10);             % 获取区间最后日期</p>
+                        <p class="q-ma-md">>> d = boost_date_period_end(2002, 1, 1, 2002, 1, 10);              % 获取区间结束边界</p>
+                        <p class="q-ma-md">>> len = boost_date_period_length(2002, 1, 1, 2);                    % 获取区间长度</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_is_null(2002, 1, 10, 2002, 1, 1);          % 检查区间是否无效</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_contains_date(2002, 1, 1, 2002, 1, 10, 2002, 1, 2);  % 检查日期是否在区间内</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_contains_date_period(2002,1,1,2002,1,10,2002,1,2,2002,1,3);  % 检查区间是否有交集</p>
+                        <p class="q-ma-md">>> dp = boost_date_period_intersection(2002,1,1,2002,1,10,2002,1,2,2002,1,3);  % 计算区间交集</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_is_adjacent(2002,1,1,2002,1,3,2002,1,3,2002,1,10);  % 检查区间是否相邻</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_is_after(2002,1,10,2002,1,30,2002,1,3);  % 检查区间是否在日期之后</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_is_before(2002,1,1,2002,1,3,2002,1,10);  % 检查区间是否在日期之前</p>
+                        <p class="q-ma-md">>> dp = boost_date_period_merge(2002,1,1,2002,1,10,2002,1,9,2002,1,31);  % 计算区间并集</p>
+                        <p class="q-ma-md">>> dp = boost_date_period_span(2002,1,1,2002,1,5,2002,1,9,2002,1,31);  % 计算区间跨度</p>
+                        <p class="q-ma-md">>> str = boost_date_span_to_simple_string(2002,1,1,2002,1,31);  % 区间转字符串</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_eq(2002,1,1,2002,1,10,2002,1,1,2002,1,10);  % 区间相等比较</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_ne(2002,1,1,2002,1,10,2002,1,1,2002,1,11);  % 区间不等比较</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_gt(2002,1,10,2002,1,30,2002,1,1,2002,1,10);  % 区间大于比较</p>
+                        <p class="q-ma-md">>> tf = boost_date_period_lt(2002,1,1,2002,1,10,2002,1,10,2002,1,30);  % 区间小于比较</p>
+                        <q-separator></q-separator>
+                        <div class="text-h5 q-ma-md text-red-10">多线程并行执行：</div>
+                        <p class="q-ma-md">>> result = boost_multi_thread_run_octave_file("myscript.m", 4);            % 并行执行脚本文件</p>
+<p class="q-ma-md">>> result = boost_multi_thread_call_octave_function(@rand, 4, {3, 3});    % 并行调用函数句柄</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_eval_octave_expression("rand()", 4);       % 并行 eval 表达式</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_feval_octave_expression("sin", 4, {pi/2}); % 并行 feval 函数</p>
+                        <p class="q-ma-md">>> result.thread_id    % 查看每个线程的 ID</p>
+                        <p class="q-ma-md">>> result.output       % 查看每个线程的输出</p>
+                        <p class="q-ma-md">>> result.result       % 查看每个线程的返回值</p>
+                        <p class="q-ma-md">>> demo_boost_thread(4)     % 运行线程模块演示</p>
+                        <q-separator></q-separator>
+                        <div id="references" class="title1 q-ma-md text-primary">引用octave_boost</div>
+                        <div class="text-h5 q-ma-md text-red-10">如果你在学术研究中涉及octave_boost，那么可以按需引用以下内容。</div>
+                        <div class="text-h5 q-ma-md text-red-10">octave_boost源码(BibTeX)</div>
+                        <p class="q-ma-md">@misc{CNOCTAVE2024,
+                            author = {Yu Hongbo, },
+                            title = {octave_boost},
+                            year = {2024},
+                            howpublished = {\url{https://github.com/CNOCTAVE/octave_boost}},
+                          }</p>
+                        <div class="text-h5 q-ma-md text-red-10">octave_boost文档(BibTeX)</div>
+                        <p class="q-ma-md">@techreport{CNOCTAVE2024,
+                            author = {Yu Hongbo, },
+                            title = {octave_boost Document},
+                            institution = {BA DU XIN SHANG},
+                            year = {2024},
+                            number = {1},
+                            month = {10},
+                            url = {https://cnoctave.github.io/octave_boost/index.html},
+                            urldate = {2024-10-07},
+                          }</p>
+                        <div class="text-h5 q-ma-md text-red-10">octave_boost: A Comprehensive High Performance Processing Package for GNU Octave(BibTeX)</div>
+                        <p class="q-ma-md" style="white-space: normal;">@article{https://engrxiv.org/preprint/view/4192,
+                            doi = {10.31224/4192},
+                            url = {https://engrxiv.org/preprint/view/4192},
+                            author = {Yu Hongbo, },
+                            keywords = {CNOCTAVE, GNU, Boost, statistical computing, accumulators, signal processing, open-source software},
+                            title = {octave_boost: A Comprehensive High Performance Processing Package for GNU Octave Based on Boost C++ Libraries},
+                            publisher = {engrxiv},
+                            year = {2024},
+                            copyright = {Creative Commons Attribution 4.0 International},
+                          }</p>
+                    </div>
+                </div>
+                <q-toolbar class="bg-grey-8 text-white q-my-md shadow-2">
+                    <q-btn-dropdown stretch flat label="版权所有 ©">
+                      <q-list>
+                        <q-item clickable v-close-popup @click="goTo('http://cnoctave.top')">
+                          <q-item-section>
+                            <q-item-label>© 2024 CNOCTAVE</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                        <q-item clickable v-close-popup @click="goTo('https://orcid.org/0009-0007-9436-4161')">
+                          <q-item-section>
+                            <q-item-label>© 2024 Yu Hongbo</q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-btn-dropdown>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="此文档受Creative Commons Attribution-NoDerivatives 4.0 International License协议保护。" 
+                    @click="goTo('https://creativecommons.org/licenses/by-nd/4.0/')"></q-btn>
+                    <q-separator dark vertical></q-separator>
+                    <q-btn stretch flat label="下载此文档的源码" 
+                    @click="goTo('https://github.com/CNOCTAVE/octave_boost')"></q-btn>
+                </q-toolbar>
+            </q-page-container>
+
+        </q-layout>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.17.0/dist/quasar.umd.prod.js"></script>
+    <script>
+
+        const App = {
+            data() {
+                return {
+                    scrollToTop() {
+                        window.scrollTo(0, 0);
+                    },
+                    goTo(target) {
+                        window.open(target, '_blank');
+                    },
+                    goToID(target) {
+                        window.open(target, '_self');
+                    },
+                    leftDrawerOpen: true,
+                };
+            },
+        };
+        const app = Vue.createApp(App);
+
+        app.use(Quasar)
+        app.mount('#q-app')
+    </script>
+</body>
+
+</html>

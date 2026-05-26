@@ -1,0 +1,367 @@
+FLAGGED_MKOCTFILE = @MKOCTFILE@ @XTRA_CXXFLAGS@
+
+## We can't link oct files, and Octave's package system does not handle
+## shared libraries. Because of this, we need to create object files for
+## our "shared" libraries and statically link to selected oct files.
+
+## All Boost.Accumulators oct files are header-only, no separate library needed.
+## The $(BOOST_CPPFLAGS) variable is set by configure.
+BOOST_OCT_FILES = \
+  boost_accumulators_coherent_tail_mean.oct \
+  boost_accumulators_count.oct \
+  boost_accumulators_covariance.oct \
+  boost_accumulators_density.oct \
+  boost_accumulators_error_of_mean.oct \
+  boost_accumulators_extended_p_square.oct \
+  boost_accumulators_extended_p_square_quantile_and_variants.oct \
+  boost_accumulators_kurtosis.oct \
+  boost_accumulators_max.oct \
+  boost_accumulators_mean_and_variants.oct \
+  boost_accumulators_median_and_variants.oct \
+  boost_accumulators_min.oct \
+  boost_accumulators_moment.oct \
+  boost_accumulators_non_coherent_tail_mean.oct \
+  boost_accumulators_p_square_cumulative_distribution.oct \
+  boost_accumulators_p_square_quantile_and_variants.oct \
+  boost_accumulators_peaks_over_threshold_and_variants.oct \
+  boost_accumulators_pot_quantile_and_variants.oct \
+  boost_accumulators_pot_tail_mean.oct \
+  boost_accumulators_skewness.oct \
+  boost_accumulators_sum_and_variants.oct \
+  boost_accumulators_tail.oct \
+  boost_accumulators_tail_quantile.oct \
+  boost_accumulators_tail_variate.oct \
+  boost_accumulators_tail_variate_means_and_variants.oct \
+  boost_accumulators_variance_and_variants.oct \
+  boost_accumulators_weighted_covariance.oct \
+  boost_accumulators_weighted_density.oct \
+  boost_accumulators_weighted_extended_p_square.oct \
+  boost_accumulators_weighted_kurtosis.oct \
+  boost_accumulators_weighted_mean_and_variants.oct \
+  boost_accumulators_weighted_median_and_variants.oct \
+  boost_accumulators_weighted_moment.oct \
+  boost_accumulators_weighted_p_square_cumulative_distribution.oct \
+  boost_accumulators_weighted_p_square_quantile_and_variants.oct \
+  boost_accumulators_weighted_peaks_over_threshold_and_variants.oct \
+  boost_accumulators_weighted_skewness.oct \
+  boost_accumulators_weighted_sum_and_variants.oct \
+  boost_accumulators_non_coherent_weighted_tail_mean.oct \
+  boost_accumulators_weighted_tail_quantile.oct \
+  boost_accumulators_weighted_tail_variate_means_and_variants.oct \
+  boost_accumulators_weighted_variance_and_variants.oct
+
+BOOST_CHRONO_OCT_FILES = \
+  boost_chrono_duration_count.oct \
+  boost_chrono_duration_add.oct \
+  boost_chrono_duration_minus.oct \
+  boost_chrono_duration_multiply.oct \
+  boost_chrono_duration_divide_by_times.oct \
+  boost_chrono_duration_divide_by_duration.oct \
+  boost_chrono_duration_remainder_by_times.oct \
+  boost_chrono_duration_remainder_by_duration.oct \
+  boost_chrono_duration_eq.oct \
+  boost_chrono_duration_ne.oct \
+  boost_chrono_duration_lt.oct \
+  boost_chrono_duration_le.oct \
+  boost_chrono_duration_gt.oct \
+  boost_chrono_duration_ge.oct \
+  boost_chrono_duration_cast.oct \
+  boost_chrono_system_clock_now.oct \
+  boost_chrono_steady_clock_now.oct \
+  boost_chrono_high_resolution_clock_now.oct \
+  boost_process_cpu_clock_now.oct \
+  boost_thread_clock_now.oct \
+  boost_chrono_system_clock_duration.oct \
+  boost_chrono_steady_clock_duration.oct \
+  boost_chrono_high_resolution_clock_duration.oct \
+  boost_process_cpu_clock_duration.oct \
+  boost_thread_clock_duration.oct \
+  boost_time_fmt_duration.oct \
+  boost_time_fmt_system_clock.oct \
+  boost_date_get_year.oct \
+  boost_date_get_month.oct \
+  boost_date_get_day.oct \
+  boost_date_get_year_month_day.oct \
+  boost_date_get_day_of_week.oct \
+  boost_date_get_day_of_year.oct \
+  boost_date_get_end_of_month.oct \
+  boost_date_is_infinity.oct \
+  boost_date_is_neg_infinity.oct \
+  boost_date_is_pos_infinity.oct \
+  boost_date_is_not_a_date.oct \
+  boost_date_is_special.oct \
+  boost_date_modjulian_day.oct \
+  boost_date_julian_day.oct \
+  boost_date_week_number.oct \
+  boost_date_end_of_month.oct \
+  boost_date_to_simple_string.oct \
+  boost_date_to_iso_string.oct \
+  boost_date_to_iso_extended_string.oct \
+  boost_date_eq.oct \
+  boost_date_ne.oct \
+  boost_date_gt.oct \
+  boost_date_lt.oct \
+  boost_date_ge.oct \
+  boost_date_le.oct \
+  boost_date_add_days.oct \
+  boost_date_minus_days.oct \
+  boost_date_minus_date.oct \
+  boost_date_to_tm.oct \
+  boost_date_from_tm.oct \
+  boost_date_period_shift.oct \
+  boost_date_period_expand.oct \
+  boost_date_period_begin.oct \
+  boost_date_period_last.oct \
+  boost_date_period_end.oct \
+  boost_date_period_length.oct \
+  boost_date_period_is_null.oct \
+  boost_date_period_contains_date.oct \
+  boost_date_period_contains_date_period.oct \
+  boost_date_period_intersection.oct \
+  boost_date_period_is_adjacent.oct \
+  boost_date_period_is_after.oct \
+  boost_date_period_is_before.oct \
+  boost_date_period_merge.oct \
+  boost_date_period_span.oct \
+  boost_date_span_to_simple_string.oct \
+  boost_date_period_eq.oct \
+  boost_date_period_ne.oct \
+  boost_date_period_gt.oct \
+  boost_date_period_lt.oct \
+  boost_date_gregorian_day_number.oct \
+  boost_date_gregorian_end_of_month_day.oct \
+  boost_date_gregorian_from_day_number.oct \
+  boost_date_gregorian_is_leap_year.oct \
+  boost_ptime_date.oct \
+  boost_ptime_time_of_day.oct \
+  boost_ptime_is_infinity.oct \
+  boost_ptime_is_neg_infinity.oct \
+  boost_ptime_is_pos_infinity.oct \
+  boost_ptime_is_not_a_date_time.oct \
+  boost_ptime_is_special.oct \
+  boost_ptime_to_simple_string.oct \
+  boost_ptime_to_iso_string.oct \
+  boost_ptime_to_iso_extended_string.oct \
+  boost_ptime_eq.oct \
+  boost_ptime_ne.oct \
+  boost_ptime_gt.oct \
+  boost_ptime_lt.oct \
+  boost_ptime_ge.oct \
+  boost_ptime_le.oct \
+  boost_ptime_add_days.oct \
+  boost_ptime_minus_days.oct \
+  boost_ptime_add_time_duration.oct \
+  boost_ptime_minus_time_duration.oct \
+  boost_ptime_minus_ptime.oct \
+  boost_ptime_to_tm.oct \
+  boost_ptime_from_tm.oct \
+  boost_ptime_from_time_t.oct \
+  boost_ptime_from_ftime.oct \
+  boost_time_duration_to_tm.oct \
+  boost_time_duration_hours.oct \
+  boost_time_duration_minutes.oct \
+  boost_time_duration_seconds.oct \
+  boost_time_duration_total_seconds.oct \
+  boost_time_duration_total_milliseconds.oct \
+  boost_time_duration_total_microseconds.oct \
+  boost_time_duration_total_nanoseconds.oct \
+  boost_time_duration_fractional_seconds.oct \
+  boost_time_duration_is_negative.oct \
+  boost_time_duration_is_zero.oct \
+  boost_time_duration_is_positive.oct \
+  boost_time_duration_invert_sign.oct \
+  boost_time_duration_abs.oct \
+  boost_time_duration_resolution.oct \
+  boost_time_duration_num_fractional_digits.oct \
+  boost_time_duration_ticks_per_second.oct \
+  boost_time_duration_ticks.oct \
+  boost_time_duration_unit.oct \
+  boost_time_duration_is_neg_infinity.oct \
+  boost_time_duration_is_pos_infinity.oct \
+  boost_time_duration_is_not_a_date_time.oct \
+  boost_time_duration_is_special.oct \
+  boost_time_duration_to_simple_string.oct \
+  boost_time_duration_to_iso_string.oct \
+  boost_time_duration_eq.oct \
+  boost_time_duration_ne.oct \
+  boost_time_duration_gt.oct \
+  boost_time_duration_lt.oct \
+  boost_time_duration_ge.oct \
+  boost_time_duration_le.oct \
+  boost_time_duration_plus_time_duration.oct \
+  boost_time_duration_minus_time_duration.oct \
+  boost_time_duration_divide_by_days.oct \
+  boost_time_duration_multiply_by_days.oct \
+  boost_time_period_begin.oct \
+  boost_time_period_last.oct \
+  boost_time_period_end.oct \
+  boost_time_period_length.oct \
+  boost_time_period_is_null.oct \
+  boost_time_period_contains_ptime.oct \
+  boost_time_period_contains_time_period.oct \
+  boost_time_period_intersects.oct \
+  boost_time_period_intersection.oct \
+  boost_time_period_merge.oct \
+  boost_time_period_span.oct \
+  boost_time_period_to_simple_string.oct \
+  boost_time_period_eq.oct \
+  boost_time_period_ne.oct \
+  boost_time_period_gt.oct \
+  boost_time_period_lt.oct \
+  boost_time_period_ge.oct \
+  boost_time_period_le.oct
+
+BOOST_PROPERTY_TREE_OCT_FILES = \
+  boost_info_file_to_ini_file.oct \
+  boost_ini_file_to_info_file.oct \
+  boost_info_file_to_json_file.oct \
+  boost_json_file_to_info_file.oct \
+  boost_info_file_to_xml_file.oct \
+  boost_xml_file_to_info_file.oct \
+  boost_ini_file_to_json_file.oct \
+  boost_json_file_to_ini_file.oct \
+  boost_ini_file_to_xml_file.oct \
+  boost_xml_file_to_ini_file.oct \
+  boost_json_file_to_xml_file.oct \
+  boost_xml_file_to_json_file.oct \
+  boost_save_as_info_file.oct \
+  boost_save_as_ini_file.oct \
+  boost_save_as_json_file.oct \
+  boost_save_as_xml_file.oct \
+  boost_parse_from_info_file.oct \
+  boost_parse_from_ini_file.oct \
+  boost_parse_from_json_file.oct \
+  boost_parse_from_xml_file.oct
+
+BOOST_THREAD_OCT_FILES = \
+  boost_multi_thread_run_octave_file.oct \
+  boost_multi_thread_call_octave_function.oct \
+  boost_multi_thread_eval_octave_expression.oct \
+  boost_multi_thread_feval_octave_expression.oct
+
+ALL_OCT_FILES = ${BOOST_OCT_FILES} ${BOOST_CHRONO_OCT_FILES} ${BOOST_PROPERTY_TREE_OCT_FILES} ${BOOST_THREAD_OCT_FILES}
+
+# M_FILES are pre-installed in ../inst/, not built from src/
+all: ${ALL_OCT_FILES}
+
+# Boost accumulators are header-only, no separate library needed.
+# The $(BOOST_CPPFLAGS) variable is set by configure.
+boost_accumulators_%.oct: boost_accumulators_%.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+# Boost chrono clocks require -lboost_chrono (clock::now() is NOT header-only on Linux)
+BOOST_CHRONO_LIBS = -lboost_chrono
+
+boost_chrono_duration_%.oct: boost_chrono_duration_%.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_chrono_%.oct: boost_chrono_%.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_process_cpu_clock_now.oct: boost_process_cpu_clock_now.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_thread_clock_now.oct: boost_thread_clock_now.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_chrono_system_clock_duration.oct: boost_chrono_system_clock_duration.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_chrono_steady_clock_duration.oct: boost_chrono_steady_clock_duration.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_chrono_high_resolution_clock_duration.oct: boost_chrono_high_resolution_clock_duration.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_process_cpu_clock_duration.oct: boost_process_cpu_clock_duration.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_thread_clock_duration.oct: boost_thread_clock_duration.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_time_fmt_duration.oct: boost_time_fmt_duration.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+boost_time_fmt_system_clock.oct: boost_time_fmt_system_clock.cc
+	$(FLAGGED_MKOCTFILE) $(BOOST_CHRONO_LIBS) $< $(BOOST_CPPFLAGS)
+
+# Boost date_time is header-only (boost/date_time/gregorian/gregorian.hpp), no separate library needed.
+boost_date_%.oct: boost_date_%.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_ptime_%.oct: boost_ptime_%.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_time_duration_%.oct: boost_time_duration_%.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_time_period_%.oct: boost_time_period_%.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+# Boost property_tree is also header-only, no separate library needed.
+boost_info_file_to_ini_file.oct: boost_info_file_to_ini_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_ini_file_to_info_file.oct: boost_ini_file_to_info_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_info_file_to_json_file.oct: boost_info_file_to_json_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_json_file_to_info_file.oct: boost_json_file_to_info_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_info_file_to_xml_file.oct: boost_info_file_to_xml_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_xml_file_to_info_file.oct: boost_xml_file_to_info_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_ini_file_to_json_file.oct: boost_ini_file_to_json_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_json_file_to_ini_file.oct: boost_json_file_to_ini_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_ini_file_to_xml_file.oct: boost_ini_file_to_xml_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_xml_file_to_ini_file.oct: boost_xml_file_to_ini_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_json_file_to_xml_file.oct: boost_json_file_to_xml_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_xml_file_to_json_file.oct: boost_xml_file_to_json_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_save_as_info_file.oct: boost_save_as_info_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_save_as_ini_file.oct: boost_save_as_ini_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_save_as_json_file.oct: boost_save_as_json_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_save_as_xml_file.oct: boost_save_as_xml_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_parse_from_info_file.oct: boost_parse_from_info_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_parse_from_ini_file.oct: boost_parse_from_ini_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_parse_from_json_file.oct: boost_parse_from_json_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+boost_parse_from_xml_file.oct: boost_parse_from_xml_file.cc
+	$(FLAGGED_MKOCTFILE) $< $(BOOST_CPPFLAGS)
+
+# Boost thread requires linking with the Boost thread library.
+boost_multi_thread_%.oct: boost_multi_thread_%.cc
+	$(FLAGGED_MKOCTFILE) -lboost_thread $< $(BOOST_CPPFLAGS)
+
+clean:
+	$(RM) *.o octave-core octave-workspace *~ ${ALL_OCT_FILES}

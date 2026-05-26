@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2024-2026 Yu Hongbo <yuhongbo@member.fsf.org>, 
+  CNOCTAVE <cnoctave@qq.com>
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<component type="addon">
+  <id>octave_boost</id>
+  <extends>www.octave.org-octave.desktop</extends>
+  <name>octave_boost</name>
+  <summary>Octave Boost C++ Libraries Integration</summary>
+  <description>
+    <p>
+      A comprehensive open-source high performance processing package for GNU Octave
+      based on Boost C++ Libraries. Provides direct access to Boost.Accumulators
+      statistical accumulators for online computation of count, covariance, density,
+      error of mean, extended P^2 quantiles, kurtosis, max/min, mean, median, moments,
+      P^2 cumulative distribution, P^2 quantile, peaks over threshold, POT quantile,
+      POT tail mean, skewness, sum, and tail statistics.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/CNOCTAVE/octave_boost</url>
+  <url type="help">https://cnoctave.github.io/octave_boost/index.html</url>
+  <project_license>GPL-3.0+</project_license>
+  <developer_name>various authors</developer_name>
+  <update_contact>cnoctave@qq.com</update_contact>
+  <metadata_license>FSFAP</metadata_license>
+</component>

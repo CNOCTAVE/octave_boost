@@ -1,0 +1,35 @@
+Name: octave_boost
+Version: 1.0.0
+Date: 2026-05-27
+Author: Yu Hongbo
+Maintainer: Yu Hongbo <yuhongbo@member.fsf.org>, CNOCTAVE <cnoctave@qq.com>
+Title: Octave Boost C++ Libraries Integration
+Description: A comprehensive open-source high performance processing package
+ for GNU Octave based on Boost C++ Libraries. Built with C++17 standard.
+ Provides direct access to
+ Boost.Accumulators statistical accumulators for online computation of
+ count, covariance, density, error of mean, extended P^2 quantiles,
+ kurtosis, max/min, mean, median, moments, P^2 cumulative distribution,
+ P^2 quantile, peaks over threshold, POT quantile, POT tail mean,
+ skewness, sum, tail statistics, coherent/non-coherent tail mean,
+ tail quantile, tail variate, tail variate means, variance,
+ weighted covariance, weighted density, weighted extended P^2 quantiles,
+ and weighted kurtosis.
+ Also provides Boost.Chrono duration operations including count, add,
+ subtract, multiply, divide, remainder, equality and inequality comparison,
+ clock elapsed time measurement (system_clock, steady_clock,
+ high_resolution_clock, process_cpu_clock, thread_clock), and time
+ formatting (time_fmt for duration and system_clock).
+ Also provides Boost.Date_Time Gregorian date handling: get year/month/day,
+ year_month_day, day_of_week, day_of_year, end_of_month (get_end_of_month
+ and end_of_month), is_infinity, is_neg_infinity, is_pos_infinity,
+ is_not_a_date, is_special, modjulian_day, julian_day, week_number,
+ to_simple_string, to_iso_string, to_iso_extended_string, date_eq,
+ date_ne, date_gt, date_lt, date_ge, date_le, add_days, minus_days,
+ minus_date, to_tm, and date_from_tm.
+ Also provides Boost.Thread multi-threading: run Octave files, call functions,
+ eval expressions, and feval expressions in parallel using boost::thread,
+ with per-thread output capture and thread ID labeling.
+Depends: octave (>= 10.1.0)
+License: GPLv3+
+Url: https://github.com/CNOCTAVE/octave_boost
