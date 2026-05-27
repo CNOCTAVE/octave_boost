@@ -211,7 +211,7 @@ without any warranty.
                         <div id="online_install" class="title1 q-ma-md text-primary">在线安装</div>
                         <p class="q-ma-md">octave_boost可以在线安装。</p>
                         <div class="text-h5 q-ma-md text-red-10">在线安装octave_boost，代码如下：</div>
-                        <p class="q-ma-md">>> pkg install 'https://github.com/CNOCTAVE/octave_boost/releases/download/1.0.0/octave_boost.tar.gz'</p>
+                        <p class="q-ma-md">>> pkg install 'https://github.com/CNOCTAVE/octave_boost/releases/download/1.1.0/octave_boost.tar.gz'</p>
                         <q-separator></q-separator>
                         <div id="source_code_install" class="title1 q-ma-md text-primary">源码安装</div>
                         <p class="q-ma-md">octave_boost可以直接使用tar包安装。</p>
@@ -868,6 +868,15 @@ without any warranty.
                         <p class="q-ma-md">示例：>> result(2)</p>
                         <q-separator></q-separator>
 
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_run_octave_files</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_run_octave_files(filenames)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_run_octave_files(filenames, num_threads)</p>
+                        <p class="q-ma-md">接收一个字符串数组（元胞数组），对数组中的每个元素启动 num_threads 个 boost::thread，并行执行指定的 Octave 脚本文件。num_threads 默认为 1。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。函数返回一个二维结构体数组，尺寸为 [numel(filenames), num_threads]，索引方式为 result(filenames_index, thread_index)。基于 boost::thread 和 Octave 的 source() 函数。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_run_octave_files({'script1.m', 'script2.m'}, 3)</p>
+                        <p class="q-ma-md">示例：>> result(1, :)</p>
+                        <p class="q-ma-md">示例：>> result(:, 1)</p>
+                        <q-separator></q-separator>
+
                         <div class="text-h6 q-ma-md text-primary">boost_multi_thread_call_octave_function</div>
                         <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_function(func_handle)</p>
                         <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_function(func_handle, num_threads)</p>
@@ -877,6 +886,16 @@ without any warranty.
                         <p class="q-ma-md">示例：>> result = boost_multi_thread_call_octave_function(@sin, 2, {pi/2})</p>
                         <p class="q-ma-md">示例：>> result(1)</p>
                         <p class="q-ma-md">示例：>> result(2)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_call_octave_functions</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_functions(func_handles)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_functions(func_handles, num_threads)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_call_octave_functions(func_handles, num_threads, args)</p>
+                        <p class="q-ma-md">接收一个函数句柄元胞数组，对数组中的每个元素启动 num_threads 个 boost::thread，并行调用指定的 Octave 函数句柄。num_threads 默认为 1。func_handles 为函数句柄元胞数组（如 {@sin, @cos}）。args 默认为空矩阵。args 中的每个元素都必须为元胞，元胞中包含传递给函数的参数。函数句柄数组和参数数组的尺寸必须相同。如果函数句柄数组对应的函数需要不带参数调用，则参数数组对应的参数必须写成空元胞。如果一个函数需要的参数恰好是空元胞，则写成{ {} }。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。函数返回一个二维结构体数组，尺寸为 [numel(func_handles), num_threads]，索引方式为 result(func_handles_index, thread_index)。基于 boost::thread 和 Octave 的 evalc() 函数，通过单次 evalc 调用同时捕获 output 和 result。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_call_octave_functions({@rand, @randi, @plus}, 2, { {1, 2}, {3}, {4, 5} })</p>
+                        <p class="q-ma-md">示例：>> result(1, :)</p>
+                        <p class="q-ma-md">示例：>> result(:, 1)</p>
                         <q-separator></q-separator>
 
                         <div class="text-h6 q-ma-md text-primary">boost_multi_thread_eval_octave_expression</div>
@@ -889,6 +908,15 @@ without any warranty.
                         <p class="q-ma-md">示例：>> result(2)</p>
                         <q-separator></q-separator>
 
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_eval_octave_expressions</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_eval_octave_expressions(expressions)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_eval_octave_expressions(expressions, num_threads)</p>
+                        <p class="q-ma-md">接收一个表达式字符串元胞数组，对数组中的每个元素启动 num_threads 个 boost::thread，并行 eval() 指定的 Octave 表达式字符串。num_threads 默认为 1。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。函数返回一个二维结构体数组，尺寸为 [numel(expressions), num_threads]，索引方式为 result(expressions_index, thread_index)。基于 boost::thread 和 Octave 的 eval() 函数。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_eval_octave_expressions({"rand()", "sum(rand(1,10))"}, 2)</p>
+                        <p class="q-ma-md">示例：>> result(1, :)</p>
+                        <p class="q-ma-md">示例：>> result(:, 1)</p>
+                        <q-separator></q-separator>
+
                         <div class="text-h6 q-ma-md text-primary">boost_multi_thread_feval_octave_expression</div>
                         <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expression(funcname)</p>
                         <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expression(funcname, num_threads)</p>
@@ -898,6 +926,16 @@ without any warranty.
                         <p class="q-ma-md">示例：>> result = boost_multi_thread_feval_octave_expression("cos", 2, {0})</p>
                         <p class="q-ma-md">示例：>> result(1)</p>
                         <p class="q-ma-md">示例：>> result(2)</p>
+                        <q-separator></q-separator>
+
+                        <div class="text-h6 q-ma-md text-primary">boost_multi_thread_feval_octave_expressions</div>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expressions(funcnames)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expressions(funcnames, num_threads)</p>
+                        <p class="q-ma-md">Loadable Function: result = boost_multi_thread_feval_octave_expressions(funcnames, num_threads, args)</p>
+                        <p class="q-ma-md">接收一个函数名称字符串元胞数组，对数组中的每个元素启动 num_threads 个 boost::thread，并行 feval() 指定的 Octave 函数。num_threads 默认为 1。funcnames 为函数名称字符串元胞数组（如 {"sin", "cos"}）。args 默认为空矩阵。args 中的每个元素都必须为元胞，元胞中包含传递给 feval 的参数。函数名称数组和参数数组的尺寸必须相同。如果函数名称数组对应的函数需要不带参数调用，则参数数组对应的参数必须写成空元胞。如果一个函数需要的参数恰好是空元胞，则写成{ {} }。所有线程的输出将被重定向，格式为 [thread_id] 对应输出。函数返回一个二维结构体数组，尺寸为 [numel(funcnames), num_threads]，索引方式为 result(funcnames_index, thread_index)。基于 boost::thread 和 Octave 的 evalc() 函数，通过单次 evalc 调用同时捕获 output 和 result。</p>
+                        <p class="q-ma-md">示例：>> result = boost_multi_thread_feval_octave_expressions({"rand", "sin"}, 2, { {3, 3}, {pi/2} })</p>
+                        <p class="q-ma-md">示例：>> result(1, :)</p>
+                        <p class="q-ma-md">示例：>> result(:, 1)</p>
                         <q-separator></q-separator>
 
                         <div id="boost_date_time" class="text-h5 q-ma-md text-red-10">Boost.Date_Time 日期处理</div>
@@ -1877,9 +1915,13 @@ without any warranty.
                         <q-separator></q-separator>
                         <div class="text-h5 q-ma-md text-red-10">多线程并行执行：</div>
                         <p class="q-ma-md">>> result = boost_multi_thread_run_octave_file("myscript.m", 4);            % 并行执行脚本文件</p>
-<p class="q-ma-md">>> result = boost_multi_thread_call_octave_function(@rand, 4, {3, 3});    % 并行调用函数句柄</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_run_octave_files({"script1.m", "script2.m"}); % 并行执行多个脚本文件</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_call_octave_function(@rand, 4, {3, 3});    % 并行调用函数句柄</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_call_octave_functions({@rand, @randi, @plus}, { {1, 2}, {3}, {4, 5} }); % 并行调用多个函数句柄</p>
                         <p class="q-ma-md">>> result = boost_multi_thread_eval_octave_expression("rand()", 4);       % 并行 eval 表达式</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_eval_octave_expressions({"rand()", "sum(rand(1,10))"}); % 并行 eval 多个表达式</p>
                         <p class="q-ma-md">>> result = boost_multi_thread_feval_octave_expression("sin", 4, {pi/2}); % 并行 feval 函数</p>
+                        <p class="q-ma-md">>> result = boost_multi_thread_feval_octave_expressions({"rand", "sin"}, { {3, 3}, {pi/2} }); % 并行 feval 多个函数</p>
                         <p class="q-ma-md">>> result.thread_id    % 查看每个线程的 ID</p>
                         <p class="q-ma-md">>> result.output       % 查看每个线程的输出</p>
                         <p class="q-ma-md">>> result.result       % 查看每个线程的返回值</p>

@@ -23,4 +23,4 @@ jobs:
       # uncomment this on demand
       - run: sudo chmod -R a+x octave_boost/inst
       - run: tar --warning=no-file-changed --exclude='octave_boost/.git' --exclude='octave_boost/.github' -czvf octave_boost.tar.gz octave_boost
-      - run: gh release upload 1.0.0 octave_boost.tar.gz --repo $GITHUB_REPOSITORY
+      - run: gh release upload 1.1.0 octave_boost.tar.gz --repo $GITHUB_REPOSITORY

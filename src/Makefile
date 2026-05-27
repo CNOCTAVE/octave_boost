@@ -303,9 +303,13 @@ BOOST_PROPERTY_TREE = \
 # Boost.Thread requires -lboost_thread
 BOOST_THREAD = \
   boost_multi_thread_run_octave_file \
+  boost_multi_thread_run_octave_files \
   boost_multi_thread_call_octave_function \
+  boost_multi_thread_call_octave_functions \
   boost_multi_thread_eval_octave_expression \
-  boost_multi_thread_feval_octave_expression
+  boost_multi_thread_eval_octave_expressions \
+  boost_multi_thread_feval_octave_expression \
+  boost_multi_thread_feval_octave_expressions
 
 # All .oct targets
 OCT_FILES = $(addsuffix .oct, $(BOOST_ACCUMULATORS) $(BOOST_CHRONO) \

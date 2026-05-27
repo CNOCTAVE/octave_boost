@@ -29,8 +29,8 @@
 ## @item @code{boost_multi_thread_feval_octave_expression}
 ## @end itemize
 ##
-## @seealso{boost_multi_thread_run_octave_file, boost_multi_thread_call_octave_function,
-## boost_multi_thread_eval_octave_expression, boost_multi_thread_feval_octave_expression}
+## @seealso{boost_multi_thread_run_octave_file, boost_multi_thread_run_octave_files, boost_multi_thread_call_octave_function, boost_multi_thread_call_octave_functions,
+## boost_multi_thread_eval_octave_expression, boost_multi_thread_eval_octave_expressions, boost_multi_thread_feval_octave_expression, boost_multi_thread_feval_octave_expressions}
 ## @end deftypefn
 
 function demo_boost_thread (n = 4)
@@ -101,6 +101,45 @@ function demo_boost_thread (n = 4)
   printf ("并行 feval sin(pi/2):\n");
   result4 = boost_multi_thread_feval_octave_expression ("sin", n, {pi/2});
   disp (result4);
+
+  printf ("\n");
+  printf ("========================================\n");
+  printf ("  5. boost_multi_thread_run_octave_files\n");
+  printf ("========================================\n");
+  printf ("并行执行多个脚本文件:\n");
+  ## First create sample scripts
+  fid1 = fopen (fullfile (tmpdir, "demo_file1.m"), "w");
+  fprintf (fid1, "x = rand(3); disp('File1 done');\n");
+  fclose (fid1);
+  fid2 = fopen (fullfile (tmpdir, "demo_file2.m"), "w");
+  fprintf (fid2, "y = rand(3); disp('File2 done');\n");
+  fclose (fid2);
+  result5 = boost_multi_thread_run_octave_files ({"demo_file1.m", "demo_file2.m"}, 2);
+  disp (result5);
+
+  printf ("\n");
+  printf ("========================================\n");
+  printf ("  6. boost_multi_thread_call_octave_functions\n");
+  printf ("========================================\n");
+  printf ("并行调用多个不同函数句柄:\n");
+  result6 = boost_multi_thread_call_octave_functions ({@rand, @randi, @plus}, 2, {{1, 2}, {3}, {4, 5}});
+  disp (result6);
+
+  printf ("\n");
+  printf ("========================================\n");
+  printf ("  7. boost_multi_thread_eval_octave_expressions\n");
+  printf ("========================================\n");
+  printf ("并行 eval 多个表达式:\n");
+  result7 = boost_multi_thread_eval_octave_expressions ({"rand()", "sum(rand(1,10))"}, 2);
+  disp (result7);
+
+  printf ("\n");
+  printf ("========================================\n");
+  printf ("  8. boost_multi_thread_feval_octave_expressions\n");
+  printf ("========================================\n");
+  printf ("并行 feval 多个函数:\n");
+  result8 = boost_multi_thread_feval_octave_expressions ({"rand", "sin"},2 ,{{3, 3}, {pi/2}});
+  disp (result8);
 
   printf ("\n");
   printf ("========================================\n");

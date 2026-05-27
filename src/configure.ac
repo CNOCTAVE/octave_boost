@@ -7,7 +7,7 @@
 ## without any warranty.
 
 AC_PREREQ([2.67])
-AC_INIT([octave_boost], [1.0.0])
+AC_INIT([octave_boost], [1.1.0])
 
 AC_CONFIG_HEADERS([config.h])
 

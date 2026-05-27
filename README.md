@@ -1,103 +1,42 @@
 # octave_boost
 
-The octave_boost package provides a comprehensive high performance processing
-toolkit for GNU Octave, based on Boost C++ Libraries. It offers direct access
-to Boost.Accumulators statistical accumulators for online computation of
-count, covariance, density, error of mean, extended P^2 quantiles,
-kurtosis, max/min, mean, median, moments, P^2 cumulative distribution,
-P^2 quantile, peaks over threshold, POT quantile, POT tail mean,
-skewness, sum, and tail statistics.
-
-## Features
-
-### Boost.Accumulators Statistical Accumulators
-
-- **boost_accumulators_count**: Count the number of (non-NaN) elements
-- **boost_accumulators_covariance**: Compute covariance between two variables
-- **boost_accumulators_density**: Estimate probability density function
-- **boost_accumulators_error_of_mean**: Compute standard error of the mean
-- **boost_accumulators_extended_p_square**: Multiple quantile estimation (extended P^2)
-- **boost_accumulators_extended_p_square_quantile_and_variants**: Quantile estimation with 4 variants
-- **boost_accumulators_kurtosis**: Compute kurtosis (tailedness measure)
-- **boost_accumulators_max**: Compute maximum value
-- **boost_accumulators_mean_and_variants**: Mean, count, sum, weighted statistics
-- **boost_accumulators_median_and_variants**: Median via 3 algorithms (P^2, density, CDF)
-- **boost_accumulators_min**: Compute minimum value
-- **boost_accumulators_moment**: Compute k-th moment (k=1..5)
-- **boost_accumulators_p_square_cumulative_distribution**: P^2 cumulative distribution
-- **boost_accumulators_p_square_quantile_and_variants**: P^2 quantile with weights
-- **boost_accumulators_peaks_over_threshold_and_variants**: POT quantile and tail mean
-- **boost_accumulators_pot_quantile_and_variants**: POT quantile estimation
-- **boost_accumulators_pot_tail_mean**: POT tail mean (left and right tails)
-- **boost_accumulators_skewness**: Compute skewness (asymmetry measure)
-- **boost_accumulators_sum_and_variants**: Sum, Kahan-compensated sum, weighted sum
-- **boost_accumulators_tail**: Extract largest/smallest N values
-
-All functions skip NaN values automatically and support both row and column vectors as well as matrices.
+ A comprehensive open-source high performance
+ processing package for GNU Octave based on Boost C++
+ Libraries. Built with C++17 standard.
+ Provides direct access to Boost.Accumulators statistical
+ accumulators for online computation of count, covariance,
+ density, error of mean, extended P^2 quantiles, kurtosis,
+ max/min, mean, median, moments, P^2 cumulative distribution,
+ P^2 quantile, peaks over threshold, POT quantile, POT tail mean,
+ skewness, sum, tail statistics, coherent/non-coherent tail mean,
+ tail quantile, tail variate, tail variate means, variance,
+ weighted covariance, weighted density, weighted extended P^2 quantiles,
+ and weighted kurtosis.
+ Also provides Boost.Chrono duration operations including 
+ count, add, subtract, multiply, divide, remainder, equality
+ and inequality comparison, clock elapsed time measurement 
+ (system_clock, steady_clock, high_resolution_clock, 
+ process_cpu_clock, thread_clock), and time formatting
+ (time_fmt for duration and system_clock).
+ Also provides Boost.Date_Time Gregorian date handling: get year/month/day,
+ year_month_day, day_of_week, day_of_year, end_of_month (get_end_of_month
+ and end_of_month), is_infinity, is_neg_infinity, is_pos_infinity,
+ is_not_a_date, is_special, modjulian_day, julian_day, week_number,
+ to_simple_string, to_iso_string, to_iso_extended_string, date_eq,
+ date_ne, date_gt, date_lt, date_ge, date_le, add_days, minus_days,
+ minus_date, to_tm, and date_from_tm.
+ Also provides Boost.Thread multi-threading: run Octave files, call
+ functions, eval expressions, and feval expressions in parallel using
+ boost::thread, with per-thread output capture and thread ID labeling.
+ The plural variants (boost_multi_thread_run_octave_files, 
+ boost_multi_thread_call_octave_functions,
+ boost_multi_thread_eval_octave_expressions,
+ boost_multi_thread_feval_octave_expressions)
+ accept cell arrays and launch one thread per element.
 
 ## Documentation
 
 Check out document: [octave_boost Document](https://cnoctave.github.io/octave_boost/index.html)
-
-## Installation
-
-### Prerequisites
-- GNU Octave (>= 8.0.0)
-- Boost C++ development headers (Boost.Accumulators is header-only, no compiled library needed)
-
-### Build from source
-```bash
-# Clone the repository
-git clone https://github.com/CNOCTAVE/octave_boost.git
-cd octave_boost
-
-# Build the package
-cd src
-./configure
-make
-
-# Install in Octave
-octave --eval "pkg install .."
-```
-
-### Install directly in Octave
-```octave
-pkg install https://github.com/CNOCTAVE/octave_boost/archive/main.tar.gz
-```
-
-## Quick Start
-
-```octave
-% Load the package
-pkg load octave_boost
-
-% Basic statistics
-data = randn (1000, 1);
-cnt = boost_accumulators_count (data);
-m = boost_accumulators_max (data);
-mn = boost_accumulators_min (data);
-
-% Mean and variants
-res = boost_accumulators_mean_and_variants (data);
-printf ("mean = %f, count = %d, sum = %f\n", res.mean, res.count, res.sum);
-
-% Skewness and kurtosis
-s = boost_accumulators_skewness ([2, 7, 4, 9, 3]);
-k = boost_accumulators_kurtosis ([2, 7, 4, 9, 3]);
-
-% Quantile estimation
-q = boost_accumulators_p_square_quantile_and_variants (data, 0.5);
-printf ("median = %f\n", q.quantile);
-
-% Density estimation
-d = boost_accumulators_density (data);
-
-% Covariance
-c = boost_accumulators_covariance ([1, 2; 1, 4; 2, 3; 6, 1]);
-
-% Run the full demo
-demo_boost_accumulators ();
-```
 
 ## Package Structure
 ```

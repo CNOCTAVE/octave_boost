@@ -235,9 +235,13 @@ BOOST_PROPERTY_TREE_OCT_FILES = \
 
 BOOST_THREAD_OCT_FILES = \
   boost_multi_thread_run_octave_file.oct \
+  boost_multi_thread_run_octave_files.oct \
   boost_multi_thread_call_octave_function.oct \
+  boost_multi_thread_call_octave_functions.oct \
   boost_multi_thread_eval_octave_expression.oct \
-  boost_multi_thread_feval_octave_expression.oct
+  boost_multi_thread_eval_octave_expressions.oct \
+  boost_multi_thread_feval_octave_expression.oct \
+  boost_multi_thread_feval_octave_expressions.oct
 
 ALL_OCT_FILES = ${BOOST_OCT_FILES} ${BOOST_CHRONO_OCT_FILES} ${BOOST_PROPERTY_TREE_OCT_FILES} ${BOOST_THREAD_OCT_FILES}
 
