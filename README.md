@@ -33,6 +33,8 @@
  boost_multi_thread_eval_octave_expressions,
  boost_multi_thread_feval_octave_expressions)
  accept cell arrays and launch one thread per element.
+ Also provides Boost.PropertyTree config format conversion, including
+ XML, JSON, INI and INFO(INF) formats.
 
 ## Documentation
 
