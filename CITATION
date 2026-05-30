@@ -5,3 +5,15 @@ octave_boost源码(BibTeX)
 
 octave_boost文档(BibTeX)
 @techreport{CNOCTAVE2026, author = {Yu Hongbo, }, title = {octave_boost Document}, institution = {BA DU XIN SHANG}, year = {2026}, number = {27}, month = {5}, url = {https://cnoctave.github.io/octave_boost/index.html}, urldate = {2026-05-27}, }
+
+The Performance Improvement of Octave in Solving Various Problems Through Multithreading Technology
+@article{https://doi.org/10.31224/7225,
+doi = {10.31224/7225},
+url = {https://engrxiv.org/preprint/view/7225},
+author = {Yu Hongbo, },
+keywords = {Multithreading Technology, Octave, Artificial Intelligence, Differential Equation, Finite Element Analysis, Parameter Sweeping},
+title = {The Performance Improvement of Octave in Solving Various Problems Through Multithreading Technology},
+publisher = {engrxiv},
+year = {2026},
+copyright = {Creative Commons Attribution 4.0 International},
+}
